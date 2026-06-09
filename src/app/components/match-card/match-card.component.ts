@@ -33,7 +33,7 @@ const FLAGS: Record<string, string> = {
             <span class="name">{{ match.homeTeam }}</span>
           </div>
           <div class="score-time">
-            <ng-container *ngIf="match.status === 'finished' || match.status === 'live'; else showTime">
+            <ng-container *ngIf="showScore; else showTime">
               <span class="score" [class.live-score]="match.status === 'live'">
                 {{ match.homeScore }} – {{ match.awayScore }}
               </span>
@@ -148,6 +148,14 @@ export class MatchCardComponent {
 
   flag(team: string): string {
     return FLAGS[team] ?? '🏳️';
+  }
+
+  get showScore(): boolean {
+    if (this.match.status === 'live') return true;
+    if (this.match.status !== 'finished') return false;
+    const matchDate = new Date(`${this.match.date}T00:00:00`);
+    matchDate.setDate(matchDate.getDate() + 2);
+    return new Date() >= matchDate;
   }
 
   get localTime(): string {
