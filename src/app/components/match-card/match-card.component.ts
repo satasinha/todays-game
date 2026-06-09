@@ -61,91 +61,82 @@ const FLAGS: Record<string, string> = {
     .match-card.finished { opacity: 0.8; }
     .match-card.live { border-left: 4px solid #e53935; }
 
-    mat-card-content { padding: 20px 24px !important; }
+    mat-card-content { padding: 16px 20px !important; }
 
     .stage-row {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 18px;
+      gap: 8px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
     }
     .stage-badge {
-      font-size: 44px;
+      font-size: 18px;
       font-weight: 600;
-      padding: 6px 20px;
+      padding: 3px 10px;
       border-radius: 20px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
+      flex-shrink: 0;
     }
     .stage-group { background: #e8f5e9; color: #2e7d32; }
     .stage-knockout { background: #fff3e0; color: #e65100; }
     .stage-final { background: #fce4ec; color: #880e4f; }
-    .venue { font-size: 48px; color: var(--mat-sys-on-surface-variant); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .venue { font-size: 16px; color: var(--mat-sys-on-surface-variant); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
 
     .teams-row {
       display: grid;
       grid-template-columns: 1fr auto 1fr;
       align-items: center;
-      gap: 16px;
+      gap: 12px;
     }
     .team {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 10px;
       font-weight: 500;
-      font-size: 56px;
+      font-size: 28px;
       min-width: 0;
     }
     .team.home { justify-content: flex-end; }
     .team.away { justify-content: flex-start; }
     .name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+    .flag { font-size: 44px; line-height: 1; }
+    .score-time { text-align: center; min-width: 100px; }
+    .score { font-size: 44px; font-weight: 700; }
+    .live-score { color: #e53935; }
+    .live-pill {
+      display: block;
+      font-size: 18px;
+      background: #e53935;
+      color: white;
+      border-radius: 4px;
+      padding: 3px 8px;
+      margin-top: 4px;
+      animation: pulse 1.2s infinite;
+    }
+    .time { font-size: 32px; font-weight: 600; color: var(--mat-sys-primary); }
+
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
 
     @media (max-width: 760px) {
-      mat-card-content { padding: 16px 14px !important; }
+      mat-card-content { padding: 14px 12px !important; }
       .teams-row {
         grid-template-columns: 1fr;
         grid-template-rows: auto auto auto;
         gap: 10px;
       }
-      .team { justify-content: flex-start !important; font-size: 56px; gap: 12px; }
+      .team { justify-content: flex-start !important; font-size: 36px; gap: 10px; }
       .team.away { flex-direction: row; }
       .score-time { text-align: left; min-width: unset; }
       .name { white-space: normal; overflow: visible; text-overflow: unset; }
-      .flag { font-size: 72px; }
-      .score { font-size: 80px; }
-      .time { font-size: 56px; }
-      .stage-badge { font-size: 44px; padding: 6px 20px; }
-      .venue { font-size: 40px; white-space: normal; }
-      .stage-row { margin-bottom: 18px; gap: 12px; }
-      .live-pill { font-size: 36px; padding: 4px 12px; }
-    }
-    .flag { font-size: 80px; line-height: 1; }
-    .score-time { text-align: center; min-width: 160px; }
-    .score { font-size: 80px; font-weight: 700; }
-    .live-score { color: #e53935; }
-    .live-pill {
-      display: block;
-      font-size: 36px;
-      background: #e53935;
-      color: white;
-      border-radius: 4px;
-      padding: 4px 12px;
-      margin-top: 6px;
-      animation: pulse 1.2s infinite;
-    }
-    .time { font-size: 28px; font-weight: 600; color: var(--mat-sys-primary); }
-
-    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
-
-    @media (max-width: 760px) {
-      mat-card-content { padding: 10px 12px !important; }
-      .stage-badge { font-size: 10px; padding: 2px 6px; }
-      .venue { font-size: 11px; }
-      .team { font-size: 13px; gap: 4px; }
-      .flag { font-size: 18px; }
-      .score { font-size: 18px; }
-      .time { font-size: 13px; }
-      .score-time { min-width: 60px; }
+      .flag { font-size: 44px; }
+      .score { font-size: 48px; }
+      .time { font-size: 36px; }
+      .stage-badge { font-size: 18px; padding: 3px 10px; }
+      .venue { font-size: 15px; white-space: normal; }
+      .stage-row { margin-bottom: 12px; }
+      .live-pill { font-size: 20px; padding: 3px 8px; }
     }
   `]
 })
