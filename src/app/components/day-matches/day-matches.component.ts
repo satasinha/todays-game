@@ -103,7 +103,7 @@ export class DayMatchesComponent implements OnChanges {
   get dateLabel(): string {
     if (!this.selectedDate) return '';
     return this.selectedDate.toLocaleDateString(undefined, {
-      weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'
+      weekday: 'long', month: 'long', day: 'numeric'
     });
   }
 
