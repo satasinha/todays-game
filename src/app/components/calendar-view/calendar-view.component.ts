@@ -324,19 +324,33 @@ export class CalendarViewComponent implements OnInit {
 
   private buildCalendar(): void {
     const { year, month } = this.months[this.currentMonth];
-    const firstDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
     const tournamentStart = new Date(2026, 5, 11);
     const tournamentEnd = new Date(2026, 6, 19);
 
+    // If today falls in the displayed month, start the grid from the Sunday
+    // of the current week so it appears in the first row.
+    const todayInThisMonth =
+      this.today.getFullYear() === year && this.today.getMonth() === month;
+    let startDay = 1;
+    if (todayInThisMonth) {
+      const sundayOfCurrentWeek = new Date(this.today);
+      sundayOfCurrentWeek.setDate(this.today.getDate() - this.today.getDay());
+      // Only skip ahead if the week-start is still within this month
+      if (sundayOfCurrentWeek.getMonth() === month) {
+        startDay = sundayOfCurrentWeek.getDate();
+      }
+    }
+
     this.calendarDays = [];
 
-    // Leading empty cells
-    for (let i = 0; i < firstDay; i++) {
+    // Leading empty cells to align startDay to its day-of-week column
+    const startDow = new Date(year, month, startDay).getDay();
+    for (let i = 0; i < startDow; i++) {
       this.calendarDays.push({ date: null, dayNum: null, matches: [], isToday: false, isSelected: false, inTournament: false });
     }
 
-    for (let d = 1; d <= daysInMonth; d++) {
+    for (let d = startDay; d <= daysInMonth; d++) {
       const date = new Date(year, month, d);
       const key = this.dayKey(date);
       const matches = (this.allMatchDates.get(key) ?? []).sort((a, b) => a.timeUTC.localeCompare(b.timeUTC));
