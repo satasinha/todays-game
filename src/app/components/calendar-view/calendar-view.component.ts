@@ -17,7 +17,18 @@ interface CalendarDay {
   template: `
     <div class="page-layout">
 
-      <!-- LEFT: sticky calendar panel -->
+      <!-- Day view always on top -->
+      <div class="day-panel" #dayPanel>
+        <div class="day-panel-inner">
+          <app-day-matches *ngIf="selectedDate" [selectedDate]="selectedDate" (dateChange)="onDayNavChange($event)"></app-day-matches>
+          <div *ngIf="!selectedDate" class="day-panel-placeholder">
+            <mat-icon>touch_app</mat-icon>
+            <p>Select a day on the calendar</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Calendar panel below -->
       <div class="cal-panel">
         <div class="month-nav">
           <button mat-icon-button (click)="prevMonth()" [disabled]="currentMonth <= 0">
@@ -61,16 +72,6 @@ interface CalendarDay {
         </div>
       </div>
 
-      <!-- RIGHT: scrollable day view -->
-      <div class="day-panel" #dayPanel>
-        <div class="day-panel-inner">
-          <app-day-matches *ngIf="selectedDate" [selectedDate]="selectedDate" (dateChange)="onDayNavChange($event)"></app-day-matches>
-          <div *ngIf="!selectedDate" class="day-panel-placeholder">
-            <mat-icon>touch_app</mat-icon>
-            <p>Select a day on the calendar</p>
-          </div>
-        </div>
-      </div>
 
     </div>
   `,
@@ -85,8 +86,7 @@ interface CalendarDay {
     }
 
     @media (max-width: 760px) {
-      .cal-panel { order: 2; border-bottom: none; border-top: 2px solid var(--mat-sys-outline-variant); }
-      .day-panel  { order: 1; }
+      .cal-panel { border-bottom: none; border-top: 2px solid var(--mat-sys-outline-variant); }
     }
 
     /* ── Calendar panel: full width ── */
