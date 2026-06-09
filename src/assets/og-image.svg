@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a237e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#283593;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <!-- Green field stripe -->
+  <rect x="0" y="440" width="1200" height="190" fill="#1b5e20" opacity="0.85"/>
+  <rect x="0" y="430" width="1200" height="16" fill="#2e7d32"/>
+  <!-- Soccer ball emoji substitute -->
+  <circle cx="600" cy="260" r="110" fill="white" opacity="0.12"/>
+  <text x="600" y="310" font-family="sans-serif" font-size="160" text-anchor="middle">⚽</text>
+  <!-- Title -->
+  <text x="600" y="130" font-family="Arial,sans-serif" font-size="72" font-weight="bold" fill="white" text-anchor="middle" letter-spacing="2">FIFA World Cup 2026</text>
+  <!-- Subtitle -->
+  <text x="600" y="190" font-family="Arial,sans-serif" font-size="36" fill="#90caf9" text-anchor="middle">Canada · Mexico · USA</text>
+  <!-- Dates on green -->
+  <text x="600" y="510" font-family="Arial,sans-serif" font-size="42" font-weight="bold" fill="white" text-anchor="middle">June 11 – July 19, 2026</text>
+  <text x="600" y="565" font-family="Arial,sans-serif" font-size="30" fill="#a5d6a7" text-anchor="middle">48 teams · 12 groups · 104 matches</text>
+  <!-- Domain -->
+  <text x="600" y="610" font-family="Arial,sans-serif" font-size="24" fill="#80cbc4" text-anchor="middle" opacity="0.8">fifa-2026.curatedforsale.in</text>
+</svg>

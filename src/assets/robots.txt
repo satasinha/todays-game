@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://fifa-2026.curatedforsale.in/sitemap.xml

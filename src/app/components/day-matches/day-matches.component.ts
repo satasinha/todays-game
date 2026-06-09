@@ -1,0 +1,114 @@
+import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
+import { Match } from '../../models/match.model';
+import { MatchService } from '../../services/match.service';
+
+const TOURNAMENT_START = new Date(2026, 5, 11);
+const TOURNAMENT_END   = new Date(2026, 6, 19);
+
+@Component({
+  selector: 'app-day-matches',
+  standalone: false,
+  template: `
+    <div class="day-view">
+      <!-- Nav bar -->
+      <div class="day-nav">
+        <button mat-icon-button (click)="go(-1)" [disabled]="!canGoPrev" aria-label="Previous day">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+
+        <div class="day-nav-center">
+          <span class="day-title">{{ dateLabel }}</span>
+          <span class="match-count" *ngIf="matches.length">
+            {{ matches.length }} match{{ matches.length > 1 ? 'es' : '' }}
+          </span>
+        </div>
+
+        <button mat-icon-button (click)="go(1)" [disabled]="!canGoNext" aria-label="Next day">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+      </div>
+
+      <!-- Match list -->
+      <div *ngIf="matches.length === 0" class="no-matches">
+        <mat-icon>sports_soccer</mat-icon>
+        <p>No matches scheduled</p>
+      </div>
+
+      <app-match-card *ngFor="let m of matches" [match]="m"></app-match-card>
+    </div>
+  `,
+  styles: [`
+    .day-view { padding: 0 4px; }
+
+    .day-nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--mat-sys-outline-variant);
+    }
+    .day-nav-center {
+      flex: 1;
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      min-width: 0;
+    }
+    .day-title { font-size: 20px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .match-count {
+      font-size: 13px;
+      color: var(--mat-sys-on-surface-variant);
+      background: var(--mat-sys-surface-variant);
+      padding: 2px 10px;
+      border-radius: 12px;
+      flex-shrink: 0;
+    }
+
+    .no-matches {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 48px 0;
+      color: var(--mat-sys-on-surface-variant);
+      gap: 8px;
+    }
+    .no-matches mat-icon { font-size: 48px; width: 48px; height: 48px; opacity: 0.4; }
+    .no-matches p { margin: 0; font-size: 14px; }
+  `]
+})
+export class DayMatchesComponent implements OnChanges {
+  @Input()  selectedDate!: Date;
+  @Output() dateChange = new EventEmitter<Date>();
+
+  matches: Match[] = [];
+
+  constructor(private matchService: MatchService) {}
+
+  ngOnChanges(): void {
+    if (this.selectedDate) {
+      this.matches = this.matchService.getMatchesForDate(this.selectedDate);
+    }
+  }
+
+  get dateLabel(): string {
+    if (!this.selectedDate) return '';
+    return this.selectedDate.toLocaleDateString(undefined, {
+      weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'
+    });
+  }
+
+  get canGoPrev(): boolean {
+    return !!this.selectedDate && this.selectedDate > TOURNAMENT_START;
+  }
+
+  get canGoNext(): boolean {
+    return !!this.selectedDate && this.selectedDate < TOURNAMENT_END;
+  }
+
+  go(delta: -1 | 1): void {
+    const d = new Date(this.selectedDate);
+    d.setDate(d.getDate() + delta);
+    this.dateChange.emit(d);
+  }
+}
