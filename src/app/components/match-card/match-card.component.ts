@@ -61,18 +61,18 @@ const FLAGS: Record<string, string> = {
     .match-card.finished { opacity: 0.8; }
     .match-card.live { border-left: 4px solid #e53935; }
 
-    mat-card-content { padding: 16px 20px !important; }
+    mat-card-content { padding: 20px 24px !important; }
 
     .stage-row {
       display: flex;
       align-items: center;
-      gap: 10px;
-      margin-bottom: 14px;
+      gap: 12px;
+      margin-bottom: 18px;
     }
     .stage-badge {
-      font-size: 22px;
+      font-size: 44px;
       font-weight: 600;
-      padding: 4px 14px;
+      padding: 6px 20px;
       border-radius: 20px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -80,20 +80,20 @@ const FLAGS: Record<string, string> = {
     .stage-group { background: #e8f5e9; color: #2e7d32; }
     .stage-knockout { background: #fff3e0; color: #e65100; }
     .stage-final { background: #fce4ec; color: #880e4f; }
-    .venue { font-size: 24px; color: var(--mat-sys-on-surface-variant); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .venue { font-size: 48px; color: var(--mat-sys-on-surface-variant); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
     .teams-row {
       display: grid;
       grid-template-columns: 1fr auto 1fr;
       align-items: center;
-      gap: 12px;
+      gap: 16px;
     }
     .team {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 14px;
       font-weight: 500;
-      font-size: 28px;
+      font-size: 56px;
       min-width: 0;
     }
     .team.home { justify-content: flex-end; }
@@ -107,30 +107,30 @@ const FLAGS: Record<string, string> = {
         grid-template-rows: auto auto auto;
         gap: 10px;
       }
-      .team { justify-content: flex-start !important; font-size: 28px; gap: 8px; }
+      .team { justify-content: flex-start !important; font-size: 56px; gap: 12px; }
       .team.away { flex-direction: row; }
       .score-time { text-align: left; min-width: unset; }
       .name { white-space: normal; overflow: visible; text-overflow: unset; }
-      .flag { font-size: 36px; }
-      .score { font-size: 40px; }
-      .time { font-size: 28px; }
-      .stage-badge { font-size: 22px; padding: 4px 12px; }
-      .venue { font-size: 20px; white-space: normal; }
-      .stage-row { margin-bottom: 14px; gap: 10px; }
-      .live-pill { font-size: 18px; padding: 3px 8px; }
+      .flag { font-size: 72px; }
+      .score { font-size: 80px; }
+      .time { font-size: 56px; }
+      .stage-badge { font-size: 44px; padding: 6px 20px; }
+      .venue { font-size: 40px; white-space: normal; }
+      .stage-row { margin-bottom: 18px; gap: 12px; }
+      .live-pill { font-size: 36px; padding: 4px 12px; }
     }
-    .flag { font-size: 40px; line-height: 1; }
-    .score-time { text-align: center; min-width: 100px; }
-    .score { font-size: 40px; font-weight: 700; }
+    .flag { font-size: 80px; line-height: 1; }
+    .score-time { text-align: center; min-width: 160px; }
+    .score { font-size: 80px; font-weight: 700; }
     .live-score { color: #e53935; }
     .live-pill {
       display: block;
-      font-size: 18px;
+      font-size: 36px;
       background: #e53935;
       color: white;
       border-radius: 4px;
-      padding: 2px 8px;
-      margin-top: 4px;
+      padding: 4px 12px;
+      margin-top: 6px;
       animation: pulse 1.2s infinite;
     }
     .time { font-size: 28px; font-weight: 600; color: var(--mat-sys-primary); }
