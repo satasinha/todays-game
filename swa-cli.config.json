@@ -5,8 +5,14 @@
       "context": "http://localhost:4200",
       "run": "npm start",
       "apiLocation": "",
-      "outputLocation": "dist/angular-basic",
-      "devserverTimeout": 10000,
+      "devserverTimeout": 60000,
+      "open": "true"
+    },
+    "todays-game": {
+      "context": "http://localhost:4200",
+      "run": "npm start",
+      "apiLocation": "",
+      "devserverTimeout": 60000,
       "open": "true"
     }
   }
