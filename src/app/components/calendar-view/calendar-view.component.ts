@@ -84,6 +84,11 @@ interface CalendarDay {
       gap: 0;
     }
 
+    @media (max-width: 760px) {
+      .cal-panel { order: 2; border-bottom: none; border-top: 2px solid var(--mat-sys-outline-variant); }
+      .day-panel  { order: 1; }
+    }
+
     /* ── Calendar panel: full width ── */
     .cal-panel {
       width: 100%;
