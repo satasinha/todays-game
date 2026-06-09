@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { Match } from '../../models/match.model';
 import { MatchService } from '../../services/match.service';
 
@@ -236,13 +236,13 @@ export class CalendarViewComponent implements OnInit {
   private today = new Date();
   private allMatchDates: Map<string, Match[]> = new Map();
 
-  constructor(private matchService: MatchService) {}
+  constructor(private matchService: MatchService, private el: ElementRef) {}
 
   ngOnInit(): void {
     this.matchService.matches$.subscribe(() => {
       // Rebuild match-date index and calendar using the service's active timezone
       this.allMatchDates = this.buildMatchDateMap();
-      this.buildCalendar();
+      this.buildCalendar(true);
     });
 
     // Default to today if within tournament
@@ -322,35 +322,21 @@ export class CalendarViewComponent implements OnInit {
     return team.slice(0, 3).toUpperCase();
   }
 
-  private buildCalendar(): void {
+  private buildCalendar(scrollToCurrentWeek = false): void {
     const { year, month } = this.months[this.currentMonth];
+    const firstDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
     const tournamentStart = new Date(2026, 5, 11);
     const tournamentEnd = new Date(2026, 6, 19);
 
-    // If today falls in the displayed month, start the grid from the Sunday
-    // of the current week so it appears in the first row.
-    const todayInThisMonth =
-      this.today.getFullYear() === year && this.today.getMonth() === month;
-    let startDay = 1;
-    if (todayInThisMonth) {
-      const sundayOfCurrentWeek = new Date(this.today);
-      sundayOfCurrentWeek.setDate(this.today.getDate() - this.today.getDay());
-      // Only skip ahead if the week-start is still within this month
-      if (sundayOfCurrentWeek.getMonth() === month) {
-        startDay = sundayOfCurrentWeek.getDate();
-      }
-    }
-
     this.calendarDays = [];
 
-    // Leading empty cells to align startDay to its day-of-week column
-    const startDow = new Date(year, month, startDay).getDay();
-    for (let i = 0; i < startDow; i++) {
+    // Full month: leading empty cells from day 1
+    for (let i = 0; i < firstDay; i++) {
       this.calendarDays.push({ date: null, dayNum: null, matches: [], isToday: false, isSelected: false, inTournament: false });
     }
 
-    for (let d = startDay; d <= daysInMonth; d++) {
+    for (let d = 1; d <= daysInMonth; d++) {
       const date = new Date(year, month, d);
       const key = this.dayKey(date);
       const matches = (this.allMatchDates.get(key) ?? []).sort((a, b) => a.timeUTC.localeCompare(b.timeUTC));
@@ -363,6 +349,21 @@ export class CalendarViewComponent implements OnInit {
         inTournament: date >= tournamentStart && date <= tournamentEnd,
       });
     }
+
+    if (scrollToCurrentWeek) {
+      setTimeout(() => this.scrollToCurrentWeek(), 50);
+    }
+  }
+
+  private scrollToCurrentWeek(): void {
+    const todayCell = this.el.nativeElement.querySelector('.cal-cell.today') as HTMLElement;
+    if (!todayCell) return;
+    const scrollContainer = this.el.nativeElement.closest('.app-content') as HTMLElement;
+    if (!scrollContainer) return;
+    // Position the today row at the top of the scroll container
+    const cellTop = todayCell.getBoundingClientRect().top;
+    const containerTop = scrollContainer.getBoundingClientRect().top;
+    scrollContainer.scrollTop += cellTop - containerTop;
   }
 
   private buildMatchDateMap(): Map<string, Match[]> {
