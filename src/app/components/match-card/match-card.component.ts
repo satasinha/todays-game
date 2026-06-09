@@ -40,7 +40,7 @@ const FLAGS: Record<string, string> = {
               <span *ngIf="match.status === 'live'" class="live-pill">LIVE</span>
             </ng-container>
             <ng-template #showTime>
-              <span class="time">{{ localTime }}</span>
+              <span class="time">{{ localTime }}<span class="tz-suffix"> {{ localTz }}</span></span>
             </ng-template>
           </div>
           <div class="team away">
@@ -116,6 +116,7 @@ const FLAGS: Record<string, string> = {
       animation: pulse 1.2s infinite;
     }
     .time { font-size: 32px; font-weight: 600; color: var(--mat-sys-primary); }
+    .tz-suffix { font-size: 0.5em; font-weight: 400; opacity: 0.75; vertical-align: middle; }
 
     @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
 
@@ -150,7 +151,15 @@ export class MatchCardComponent {
   }
 
   get localTime(): string {
-    return this.matchService.formatLocalTime(this.match.date, this.match.timeUTC);
+    const full = this.matchService.formatLocalTime(this.match.date, this.match.timeUTC);
+    // Return only the time portion (before the timezone name)
+    return full.replace(/\s*(GMT[+-][\d:]+|[A-Z]{2,5})$/, '').trim();
+  }
+
+  get localTz(): string {
+    const full = this.matchService.formatLocalTime(this.match.date, this.match.timeUTC);
+    const match = full.match(/\s*(GMT[+-][\d:]+|[A-Z]{2,5})$/);
+    return match ? match[1] : '';
   }
 
   get stageClass(): string {
