@@ -94,9 +94,11 @@ const FLAGS: Record<string, string> = {
       gap: 6px;
       font-weight: 500;
       font-size: 14px;
+      min-width: 0;
     }
     .team.home { justify-content: flex-end; }
     .team.away { justify-content: flex-start; }
+    .name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
     .flag { font-size: 20px; line-height: 1; }
     .score-time { text-align: center; min-width: 72px; }
     .score { font-size: 20px; font-weight: 700; }
@@ -114,6 +116,17 @@ const FLAGS: Record<string, string> = {
     .time { font-size: 14px; font-weight: 600; color: var(--mat-sys-primary); }
 
     @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+    @media (max-width: 760px) {
+      mat-card-content { padding: 10px 12px !important; }
+      .stage-badge { font-size: 10px; padding: 2px 6px; }
+      .venue { font-size: 11px; }
+      .team { font-size: 13px; gap: 4px; }
+      .flag { font-size: 18px; }
+      .score { font-size: 18px; }
+      .time { font-size: 13px; }
+      .score-time { min-width: 60px; }
+    }
   `]
 })
 export class MatchCardComponent {

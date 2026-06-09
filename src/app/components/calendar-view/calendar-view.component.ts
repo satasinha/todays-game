@@ -208,9 +208,17 @@ interface CalendarDay {
     .day-panel-placeholder p { margin: 0; font-size: 15px; }
 
     /* ── Compact cells on small screens ── */
-    @media (max-width: 600px) {
-      .cal-cell { min-height: 60px; }
+    @media (max-width: 760px) {
+      .month-label { font-size: 28px; min-width: 160px; }
+      .tz-chip { font-size: 13px; padding: 2px 7px; }
+      .dow { font-size: 13px; }
+      .cal-cell { min-height: 80px; padding: 3px 3px; }
+      .day-num { font-size: 14px; }
+      .day-match-pill { font-size: 11px; padding: 3px 4px; gap: 0; }
+      .pill-group { font-size: 10px; }
       .pill-time { display: none; }
+      .pill-teams { font-size: 11px; }
+      .more-badge { font-size: 10px; padding: 1px 3px; }
     }
   `]
 })

@@ -117,6 +117,16 @@ import { COMMON_TIMEZONES, TzOption } from './data/timezones';
     }
 
     .tab-content { padding: 16px 0 0; }
+
+    @media (max-width: 760px) {
+      .app-toolbar { flex-wrap: wrap; padding: 8px 12px; gap: 6px; }
+      .toolbar-title { font-size: 15px; }
+      .toolbar-sub { display: none; }
+      .toolbar-dates { display: none; }
+      .tz-field { width: 160px; }
+      .spacer { display: none; }
+      .app-content { padding: 0 8px 16px; }
+    }
   `]
 })
 export class AppComponent {
