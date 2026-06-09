@@ -162,6 +162,8 @@ export class AppComponent {
 
   onTabChange(index: number): void {
     this.setTabMeta(index);
+    const names = ['schedule', 'standings', 'knockout'];
+    (window as any).gtag?.('event', 'tab_view', { tab: names[index] });
   }
 
   onTzChange(tz: string): void {
