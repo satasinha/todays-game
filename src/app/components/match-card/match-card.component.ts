@@ -99,6 +99,24 @@ const FLAGS: Record<string, string> = {
     .team.home { justify-content: flex-end; }
     .team.away { justify-content: flex-start; }
     .name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+
+    @media (max-width: 760px) {
+      .teams-row {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+        gap: 6px;
+      }
+      .team { justify-content: flex-start !important; }
+      .team.away { flex-direction: row; }
+      .score-time { text-align: left; min-width: unset; }
+      .name { white-space: normal; overflow: visible; text-overflow: unset; }
+      .flag { font-size: 22px; }
+      .score { font-size: 22px; }
+      .time { font-size: 16px; }
+      .team { font-size: 16px; }
+      .stage-badge { font-size: 12px; }
+      .venue { font-size: 12px; white-space: normal; }
+    }
     .flag { font-size: 20px; line-height: 1; }
     .score-time { text-align: center; min-width: 72px; }
     .score { font-size: 20px; font-weight: 700; }
