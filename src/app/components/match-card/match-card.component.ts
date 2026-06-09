@@ -44,8 +44,8 @@ const FLAGS: Record<string, string> = {
             </ng-template>
           </div>
           <div class="team away">
-            <span class="name">{{ match.awayTeam }}</span>
             <span class="flag">{{ flag(match.awayTeam) }}</span>
+            <span class="name">{{ match.awayTeam }}</span>
           </div>
         </div>
       </mat-card-content>
@@ -61,18 +61,18 @@ const FLAGS: Record<string, string> = {
     .match-card.finished { opacity: 0.8; }
     .match-card.live { border-left: 4px solid #e53935; }
 
-    mat-card-content { padding: 12px 16px !important; }
+    mat-card-content { padding: 16px 20px !important; }
 
     .stage-row {
       display: flex;
       align-items: center;
-      gap: 8px;
-      margin-bottom: 10px;
+      gap: 10px;
+      margin-bottom: 14px;
     }
     .stage-badge {
-      font-size: 11px;
+      font-size: 22px;
       font-weight: 600;
-      padding: 2px 8px;
+      padding: 4px 14px;
       border-radius: 20px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -80,20 +80,20 @@ const FLAGS: Record<string, string> = {
     .stage-group { background: #e8f5e9; color: #2e7d32; }
     .stage-knockout { background: #fff3e0; color: #e65100; }
     .stage-final { background: #fce4ec; color: #880e4f; }
-    .venue { font-size: 12px; color: var(--mat-sys-on-surface-variant); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .venue { font-size: 24px; color: var(--mat-sys-on-surface-variant); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
     .teams-row {
       display: grid;
       grid-template-columns: 1fr auto 1fr;
       align-items: center;
-      gap: 8px;
+      gap: 12px;
     }
     .team {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 10px;
       font-weight: 500;
-      font-size: 14px;
+      font-size: 28px;
       min-width: 0;
     }
     .team.home { justify-content: flex-end; }
@@ -119,21 +119,21 @@ const FLAGS: Record<string, string> = {
       .stage-row { margin-bottom: 14px; gap: 10px; }
       .live-pill { font-size: 18px; padding: 3px 8px; }
     }
-    .flag { font-size: 20px; line-height: 1; }
-    .score-time { text-align: center; min-width: 72px; }
-    .score { font-size: 20px; font-weight: 700; }
+    .flag { font-size: 40px; line-height: 1; }
+    .score-time { text-align: center; min-width: 100px; }
+    .score { font-size: 40px; font-weight: 700; }
     .live-score { color: #e53935; }
     .live-pill {
       display: block;
-      font-size: 10px;
+      font-size: 18px;
       background: #e53935;
       color: white;
       border-radius: 4px;
-      padding: 1px 5px;
-      margin-top: 2px;
+      padding: 2px 8px;
+      margin-top: 4px;
       animation: pulse 1.2s infinite;
     }
-    .time { font-size: 14px; font-weight: 600; color: var(--mat-sys-primary); }
+    .time { font-size: 28px; font-weight: 600; color: var(--mat-sys-primary); }
 
     @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
 
