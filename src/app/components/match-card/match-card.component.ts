@@ -101,21 +101,23 @@ const FLAGS: Record<string, string> = {
     .name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
 
     @media (max-width: 760px) {
+      mat-card-content { padding: 16px 14px !important; }
       .teams-row {
         grid-template-columns: 1fr;
         grid-template-rows: auto auto auto;
-        gap: 6px;
+        gap: 10px;
       }
-      .team { justify-content: flex-start !important; }
+      .team { justify-content: flex-start !important; font-size: 28px; gap: 8px; }
       .team.away { flex-direction: row; }
       .score-time { text-align: left; min-width: unset; }
       .name { white-space: normal; overflow: visible; text-overflow: unset; }
-      .flag { font-size: 22px; }
-      .score { font-size: 22px; }
-      .time { font-size: 16px; }
-      .team { font-size: 16px; }
-      .stage-badge { font-size: 12px; }
-      .venue { font-size: 12px; white-space: normal; }
+      .flag { font-size: 36px; }
+      .score { font-size: 40px; }
+      .time { font-size: 28px; }
+      .stage-badge { font-size: 22px; padding: 4px 12px; }
+      .venue { font-size: 20px; white-space: normal; }
+      .stage-row { margin-bottom: 14px; gap: 10px; }
+      .live-pill { font-size: 18px; padding: 3px 8px; }
     }
     .flag { font-size: 20px; line-height: 1; }
     .score-time { text-align: center; min-width: 72px; }

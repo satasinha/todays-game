@@ -75,6 +75,15 @@ const TOURNAMENT_END   = new Date(2026, 6, 19);
     }
     .no-matches mat-icon { font-size: 48px; width: 48px; height: 48px; opacity: 0.4; }
     .no-matches p { margin: 0; font-size: 14px; }
+
+    @media (max-width: 760px) {
+      .day-nav { flex-wrap: wrap; gap: 4px; }
+      .day-nav-center { flex-wrap: wrap; gap: 6px; }
+      .day-title { font-size: 32px; white-space: normal; overflow: visible; text-overflow: unset; }
+      .match-count { font-size: 22px; padding: 4px 14px; }
+      .no-matches mat-icon { font-size: 80px; width: 80px; height: 80px; }
+      .no-matches p { font-size: 26px; }
+    }
   `]
 })
 export class DayMatchesComponent implements OnChanges {
