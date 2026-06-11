@@ -79,8 +79,8 @@ const TOURNAMENT_END   = new Date(2026, 6, 19);
     @media (max-width: 760px) {
       .day-nav { flex-wrap: wrap; gap: 4px; }
       .day-nav-center { flex-wrap: wrap; gap: 6px; }
-      .day-title { font-size: 32px; white-space: normal; overflow: visible; text-overflow: unset; }
-      .match-count { font-size: 22px; padding: 4px 14px; }
+      .day-title { font-size: 18px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .match-count { font-size: 14px; padding: 2px 10px; }
       .no-matches mat-icon { font-size: 80px; width: 80px; height: 80px; }
       .no-matches p { font-size: 26px; }
     }
