@@ -24,6 +24,8 @@
     "@angular/platform-browser": "^21.2.16",
     "@angular/platform-browser-dynamic": "^21.2.16",
     "@angular/router": "^21.2.16",
+    "@fontsource/roboto": "^5.2.10",
+    "material-icons": "^1.13.14",
     "rxjs": "~6.6.6",
     "tslib": "^2.0.0",
     "zone.js": "~0.15.1"
