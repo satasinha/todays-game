@@ -34,6 +34,26 @@
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
+  <!-- Preconnect for third-party origins (DNS/TCP resolved before scripts load) -->
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+
+  <!-- Google Analytics — deferred until after page load to reduce TBT -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Z1CYNM616G', { 'send_page_view': false });
+    window.addEventListener('load', function() {
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-Z1CYNM616G';
+      document.head.appendChild(s);
+      gtag('event', 'page_view');
+    });
+  </script>
+
   <!-- Google AdSense — deferred until after page load to reduce TBT -->
   <script>
     window.addEventListener('load', function() {
@@ -43,15 +63,6 @@
       s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8104090170005938';
       document.head.appendChild(s);
     });
-  </script>
-
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z1CYNM616G"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-Z1CYNM616G');
   </script>
 
 
