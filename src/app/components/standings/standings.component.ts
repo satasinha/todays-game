@@ -138,6 +138,7 @@ const FLAGS: Record<string, string> = {
 
     table {
       width: 100%;
+      table-layout: fixed;
       border-collapse: collapse;
       font-size: 13px;
     }
@@ -153,7 +154,7 @@ const FLAGS: Record<string, string> = {
       text-transform: uppercase;
       letter-spacing: 0.4px;
     }
-    th.col-team { text-align: left; padding-left: 10px; }
+    th.col-team { text-align: left; padding-left: 10px; width: 38%; }
 
     td {
       padding: 6px 6px;
