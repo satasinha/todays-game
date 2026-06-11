@@ -55,6 +55,7 @@ import { COMMON_TIMEZONES, TzOption } from './data/timezones';
       align-items: center;
       gap: 10px;
       padding: 0 16px;
+      min-height: 48px !important;
     }
     .toolbar-icon { font-size: 22px; }
     .toolbar-title { font-size: 18px; font-weight: 700; letter-spacing: 0.3px; white-space: nowrap; }
@@ -90,7 +91,7 @@ import { COMMON_TIMEZONES, TzOption } from './data/timezones';
       display: flex;
       align-items: center;
       gap: 6px;
-      padding: 12px 20px;
+      padding: 6px 20px;
       font-size: 14px;
       font-weight: 500;
       color: var(--mat-sys-on-surface-variant);
