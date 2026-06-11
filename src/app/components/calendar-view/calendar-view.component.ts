@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Match } from '../../models/match.model';
 import { MatchService } from '../../services/match.service';
 
@@ -17,8 +17,8 @@ interface CalendarDay {
   template: `
     <div class="page-layout">
 
-      <!-- Day view always on top -->
-      <div class="day-panel" #dayPanel>
+      <!-- Day view on top -->
+      <div class="day-panel">
         <div class="day-panel-inner">
           <app-day-matches *ngIf="selectedDate" [selectedDate]="selectedDate" (dateChange)="onDayNavChange($event)"></app-day-matches>
           <div *ngIf="!selectedDate" class="day-panel-placeholder">
@@ -71,7 +71,6 @@ interface CalendarDay {
           </div>
         </div>
       </div>
-
 
     </div>
   `,
@@ -223,7 +222,6 @@ interface CalendarDay {
   `]
 })
 export class CalendarViewComponent implements OnInit {
-  @ViewChild('dayPanel') dayPanelRef!: ElementRef<HTMLElement>;
   dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   months: { year: number; month: number; label: string }[] = [
     { year: 2026, month: 5, label: 'June 2026' },
@@ -236,13 +234,12 @@ export class CalendarViewComponent implements OnInit {
   private today = new Date();
   private allMatchDates: Map<string, Match[]> = new Map();
 
-  constructor(private matchService: MatchService, private el: ElementRef) {}
+  constructor(private matchService: MatchService) {}
 
   ngOnInit(): void {
     this.matchService.matches$.subscribe(() => {
-      // Rebuild match-date index and calendar using the service's active timezone
       this.allMatchDates = this.buildMatchDateMap();
-      this.buildCalendar(true);
+      this.buildCalendar();
     });
 
     // Default to today if within tournament
@@ -282,12 +279,6 @@ export class CalendarViewComponent implements OnInit {
     if (!day.date) return;
     this.selectedDate = day.date;
     this.buildCalendar();
-    // On narrow viewports (stacked layout) scroll day panel into view
-    if (window.innerWidth <= 760) {
-      setTimeout(() => {
-        this.dayPanelRef?.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 50);
-    }
   }
 
   shortTime(m: Match): string {
@@ -322,7 +313,7 @@ export class CalendarViewComponent implements OnInit {
     return team.slice(0, 3).toUpperCase();
   }
 
-  private buildCalendar(scrollToCurrentWeek = false): void {
+  private buildCalendar(): void {
     const { year, month } = this.months[this.currentMonth];
     const firstDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -350,20 +341,6 @@ export class CalendarViewComponent implements OnInit {
       });
     }
 
-    if (scrollToCurrentWeek) {
-      setTimeout(() => this.scrollToCurrentWeek(), 50);
-    }
-  }
-
-  private scrollToCurrentWeek(): void {
-    const todayCell = this.el.nativeElement.querySelector('.cal-cell.today') as HTMLElement;
-    if (!todayCell) return;
-    const scrollContainer = this.el.nativeElement.closest('.app-content') as HTMLElement;
-    if (!scrollContainer) return;
-    // Position the today row at the top of the scroll container
-    const cellTop = todayCell.getBoundingClientRect().top;
-    const containerTop = scrollContainer.getBoundingClientRect().top;
-    scrollContainer.scrollTop += cellTop - containerTop;
   }
 
   private buildMatchDateMap(): Map<string, Match[]> {
