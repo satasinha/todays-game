@@ -1,4 +1,5 @@
-import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Match } from '../../models/match.model';
 import { MatchService } from '../../services/match.service';
 
@@ -86,13 +87,26 @@ const TOURNAMENT_END   = new Date(2026, 6, 19);
     }
   `]
 })
-export class DayMatchesComponent implements OnChanges {
+export class DayMatchesComponent implements OnChanges, OnInit, OnDestroy {
   @Input()  selectedDate!: Date;
   @Output() dateChange = new EventEmitter<Date>();
 
   matches: Match[] = [];
+  private tzSub!: Subscription;
 
   constructor(private matchService: MatchService) {}
+
+  ngOnInit(): void {
+    this.tzSub = this.matchService.matches$.subscribe(() => {
+      if (this.selectedDate) {
+        this.matches = this.matchService.getMatchesForDate(this.selectedDate);
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.tzSub.unsubscribe();
+  }
 
   ngOnChanges(): void {
     if (this.selectedDate) {
