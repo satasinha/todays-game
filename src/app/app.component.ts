@@ -140,7 +140,7 @@ export class AppComponent {
     },
     {
       title: 'FIFA World Cup 2026 Group Standings',
-      description: 'Live group standings for all 12 groups of the 2026 FIFA World Cup — points, goals, goal difference updated in real time.',
+      description: 'Group standings for all 12 groups of the 2026 FIFA World Cup — points, goals scored, and goal difference.',
     },
     {
       title: 'FIFA World Cup 2026 Knockout Bracket',
