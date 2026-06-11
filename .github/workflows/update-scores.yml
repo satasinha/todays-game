@@ -1,0 +1,44 @@
+name: Update Match Scores
+
+on:
+  schedule:
+    # Every hour during the tournament (Jun 11 – Jul 19 2026)
+    - cron: '0 * * * *'
+  workflow_dispatch:   # allow manual trigger from GitHub UI
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # needed to push the updated scores.json
+
+    steps:
+      - name: Checkout dev branch
+        uses: actions/checkout@v4
+        with:
+          ref: dev
+          fetch-depth: 1
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch and write scores
+        env:
+          FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
+          # Scores shown to users 48 hours after the match ends
+          SCORE_EMBARGO_HOURS: '48'
+        run: node scripts/update-scores.js
+
+      - name: Commit and push if scores changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/assets/data/scores.json
+          if git diff --cached --quiet; then
+            echo "No score changes — nothing to commit."
+          else
+            git commit -m "chore: update match scores [skip ci]"
+            git push
+          fi
