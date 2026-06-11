@@ -26,11 +26,13 @@ if (!API_KEY) {
 
 // ── Team name mapping (API → our naming) ─────────────────────────────────────
 const TEAM_MAP = {
-  'Korea Republic':  'South Korea',
-  'Czechia':         'Czech Republic',
-  'Türkiye':         'Turkey',
-  'Côte d\'Ivoire':  'Ivory Coast',
-  'Congo DR':        'DR Congo',
+  'Korea Republic':        'South Korea',
+  'Czechia':               'Czech Republic',
+  'Türkiye':               'Turkey',
+  'Côte d\'Ivoire':        'Ivory Coast',
+  'Congo DR':              'DR Congo',
+  'Bosnia-Herzegovina':    'Bosnia and Herzegovina',
+  'Cape Verde Islands':    'Cape Verde',
 };
 function normaliseName(name) {
   return TEAM_MAP[name] ?? name;
@@ -80,10 +82,12 @@ async function main() {
 
   for (const match of data.matches) {
     const apiStatus = match.status; // SCHEDULED | TIMED | IN_PLAY | PAUSED | FINISHED | CANCELLED
-    const home = normaliseName(match.homeTeam.name);
-    const away = normaliseName(match.awayTeam.name);
+    const home = normaliseName(match.homeTeam?.name);
+    const away = normaliseName(match.awayTeam?.name);
     const key  = `${home}|${away}`;
     const id   = fixtureIndex[key];
+
+    if (!home || !away) continue;  // knockout placeholder with no teams yet
 
     if (!id) {
       console.warn(`  No fixture ID found for: ${home} vs ${away}`);
