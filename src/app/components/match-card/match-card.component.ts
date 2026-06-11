@@ -2,19 +2,20 @@ import { Component, Input } from '@angular/core';
 import { Match } from '../../models/match.model';
 import { MatchService } from '../../services/match.service';
 
-const FLAGS: Record<string, string> = {
-  'Mexico': '🇲🇽', 'South Africa': '🇿🇦', 'South Korea': '🇰🇷', 'Czech Republic': '🇨🇿',
-  'Canada': '🇨🇦', 'Bosnia and Herzegovina': '🇧🇦', 'Qatar': '🇶🇦', 'Switzerland': '🇨🇭',
-  'Brazil': '🇧🇷', 'Morocco': '🇲🇦', 'Haiti': '🇭🇹', 'Scotland': '🏴󠁧󠁢󠁳󠁣󠁴󠁿',
-  'United States': '🇺🇸', 'Paraguay': '🇵🇾', 'Australia': '🇦🇺', 'Turkey': '🇹🇷',
-  'Germany': '🇩🇪', 'Curaçao': '🇨🇼', 'Ivory Coast': '🇨🇮', 'Ecuador': '🇪🇨',
-  'Netherlands': '🇳🇱', 'Japan': '🇯🇵', 'Sweden': '🇸🇪', 'Tunisia': '🇹🇳',
-  'Belgium': '🇧🇪', 'Egypt': '🇪🇬', 'Iran': '🇮🇷', 'New Zealand': '🇳🇿',
-  'Spain': '🇪🇸', 'Cape Verde': '🇨🇻', 'Saudi Arabia': '🇸🇦', 'Uruguay': '🇺🇾',
-  'France': '🇫🇷', 'Senegal': '🇸🇳', 'Iraq': '🇮🇶', 'Norway': '🇳🇴',
-  'Argentina': '🇦🇷', 'Algeria': '🇩🇿', 'Austria': '🇦🇹', 'Jordan': '🇯🇴',
-  'Portugal': '🇵🇹', 'DR Congo': '🇨🇩', 'Uzbekistan': '🇺🇿', 'Colombia': '🇨🇴',
-  'England': '🏴󠁧󠁢󠁥󠁮󠁧󠁿', 'Croatia': '🇭🇷', 'Ghana': '🇬🇭', 'Panama': '🇵🇦',
+// ISO 3166-1 alpha-2 codes for flagcdn.com
+const FLAG_CODES: Record<string, string> = {
+  'Mexico': 'mx', 'South Africa': 'za', 'South Korea': 'kr', 'Czech Republic': 'cz',
+  'Canada': 'ca', 'Bosnia and Herzegovina': 'ba', 'Qatar': 'qa', 'Switzerland': 'ch',
+  'Brazil': 'br', 'Morocco': 'ma', 'Haiti': 'ht', 'Scotland': 'gb-sct',
+  'United States': 'us', 'Paraguay': 'py', 'Australia': 'au', 'Turkey': 'tr',
+  'Germany': 'de', 'Curaçao': 'cw', 'Ivory Coast': 'ci', 'Ecuador': 'ec',
+  'Netherlands': 'nl', 'Japan': 'jp', 'Sweden': 'se', 'Tunisia': 'tn',
+  'Belgium': 'be', 'Egypt': 'eg', 'Iran': 'ir', 'New Zealand': 'nz',
+  'Spain': 'es', 'Cape Verde': 'cv', 'Saudi Arabia': 'sa', 'Uruguay': 'uy',
+  'France': 'fr', 'Senegal': 'sn', 'Iraq': 'iq', 'Norway': 'no',
+  'Argentina': 'ar', 'Algeria': 'dz', 'Austria': 'at', 'Jordan': 'jo',
+  'Portugal': 'pt', 'DR Congo': 'cd', 'Uzbekistan': 'uz', 'Colombia': 'co',
+  'England': 'gb-eng', 'Croatia': 'hr', 'Ghana': 'gh', 'Panama': 'pa',
 };
 
 @Component({
@@ -29,7 +30,7 @@ const FLAGS: Record<string, string> = {
         </div>
         <div class="teams-row">
           <div class="team home">
-            <span class="flag">{{ flag(match.homeTeam) }}</span>
+            <img class="flag" [src]="flagUrl(match.homeTeam)" [alt]="match.homeTeam" width="44" height="33">
             <span class="name">{{ match.homeTeam }}</span>
           </div>
           <div class="score-time">
@@ -44,7 +45,7 @@ const FLAGS: Record<string, string> = {
             </ng-template>
           </div>
           <div class="team away">
-            <span class="flag">{{ flag(match.awayTeam) }}</span>
+            <img class="flag" [src]="flagUrl(match.awayTeam)" [alt]="match.awayTeam" width="44" height="33">
             <span class="name">{{ match.awayTeam }}</span>
           </div>
         </div>
@@ -101,7 +102,7 @@ const FLAGS: Record<string, string> = {
     .team.home { justify-content: flex-end; }
     .team.away { justify-content: flex-start; }
     .name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
-    .flag { font-size: 44px; line-height: 1; }
+    .flag { width: 44px; height: 33px; object-fit: cover; border-radius: 3px; flex-shrink: 0; }
     .score-time { text-align: center; min-width: 100px; }
     .score { font-size: 44px; font-weight: 700; }
     .live-score { color: #e53935; }
@@ -131,7 +132,7 @@ const FLAGS: Record<string, string> = {
       .team.away { flex-direction: row; }
       .score-time { text-align: left; min-width: unset; }
       .name { white-space: normal; overflow: visible; text-overflow: unset; }
-      .flag { font-size: 44px; }
+      .flag { width: 44px; height: 33px; }
       .score { font-size: 48px; }
       .time { font-size: 36px; }
       .stage-badge { font-size: 18px; padding: 3px 10px; }
@@ -146,8 +147,9 @@ export class MatchCardComponent {
 
   constructor(private matchService: MatchService) {}
 
-  flag(team: string): string {
-    return FLAGS[team] ?? '🏳️';
+  flagUrl(team: string): string {
+    const code = FLAG_CODES[team];
+    return code ? `https://flagcdn.com/w80/${code}.png` : 'assets/flag-placeholder.png';
   }
 
   get showScore(): boolean {

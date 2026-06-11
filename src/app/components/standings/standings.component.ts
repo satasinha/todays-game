@@ -8,19 +8,19 @@ interface GroupTable {
   rows: GroupStanding[];
 }
 
-const FLAGS: Record<string, string> = {
-  'Mexico': '🇲🇽', 'South Africa': '🇿🇦', 'South Korea': '🇰🇷', 'Czech Republic': '🇨🇿',
-  'Canada': '🇨🇦', 'Bosnia and Herzegovina': '🇧🇦', 'Qatar': '🇶🇦', 'Switzerland': '🇨🇭',
-  'Brazil': '🇧🇷', 'Morocco': '🇲🇦', 'Haiti': '🇭🇹', 'Scotland': '🏴󠁧󠁢󠁳󠁣󠁴󠁿',
-  'United States': '🇺🇸', 'Paraguay': '🇵🇾', 'Australia': '🇦🇺', 'Turkey': '🇹🇷',
-  'Germany': '🇩🇪', 'Curaçao': '🇨🇼', 'Ivory Coast': '🇨🇮', 'Ecuador': '🇪🇨',
-  'Netherlands': '🇳🇱', 'Japan': '🇯🇵', 'Sweden': '🇸🇪', 'Tunisia': '🇹🇳',
-  'Belgium': '🇧🇪', 'Egypt': '🇪🇬', 'Iran': '🇮🇷', 'New Zealand': '🇳🇿',
-  'Spain': '🇪🇸', 'Cape Verde': '🇨🇻', 'Saudi Arabia': '🇸🇦', 'Uruguay': '🇺🇾',
-  'France': '🇫🇷', 'Senegal': '🇸🇳', 'Iraq': '🇮🇶', 'Norway': '🇳🇴',
-  'Argentina': '🇦🇷', 'Algeria': '🇩🇿', 'Austria': '🇦🇹', 'Jordan': '🇯🇴',
-  'Portugal': '🇵🇹', 'DR Congo': '🇨🇩', 'Uzbekistan': '🇺🇿', 'Colombia': '🇨🇴',
-  'England': '🏴󠁧󠁢󠁥󠁮󠁧󠁿', 'Croatia': '🇭🇷', 'Ghana': '🇬🇭', 'Panama': '🇵🇦',
+const FLAG_CODES: Record<string, string> = {
+  'Mexico': 'mx', 'South Africa': 'za', 'South Korea': 'kr', 'Czech Republic': 'cz',
+  'Canada': 'ca', 'Bosnia and Herzegovina': 'ba', 'Qatar': 'qa', 'Switzerland': 'ch',
+  'Brazil': 'br', 'Morocco': 'ma', 'Haiti': 'ht', 'Scotland': 'gb-sct',
+  'United States': 'us', 'Paraguay': 'py', 'Australia': 'au', 'Turkey': 'tr',
+  'Germany': 'de', 'Curaçao': 'cw', 'Ivory Coast': 'ci', 'Ecuador': 'ec',
+  'Netherlands': 'nl', 'Japan': 'jp', 'Sweden': 'se', 'Tunisia': 'tn',
+  'Belgium': 'be', 'Egypt': 'eg', 'Iran': 'ir', 'New Zealand': 'nz',
+  'Spain': 'es', 'Cape Verde': 'cv', 'Saudi Arabia': 'sa', 'Uruguay': 'uy',
+  'France': 'fr', 'Senegal': 'sn', 'Iraq': 'iq', 'Norway': 'no',
+  'Argentina': 'ar', 'Algeria': 'dz', 'Austria': 'at', 'Jordan': 'jo',
+  'Portugal': 'pt', 'DR Congo': 'cd', 'Uzbekistan': 'uz', 'Colombia': 'co',
+  'England': 'gb-eng', 'Croatia': 'hr', 'Ghana': 'gh', 'Panama': 'pa',
 };
 
 @Component({
@@ -62,7 +62,7 @@ const FLAGS: Record<string, string> = {
                   [class.qualify-top]="i < 2"
                   [class.qualify-third]="i === 2">
                 <td class="col-team">
-                  <span class="flag">{{ flag(row.team) }}</span>
+                  <img class="flag" [src]="flagUrl(row.team)" [alt]="row.team" width="24" height="18">
                   <span class="team-name">{{ row.team }}</span>
                 </td>
                 <td>{{ row.played }}</td>
@@ -175,7 +175,7 @@ const FLAGS: Record<string, string> = {
       padding-left: 10px;
       min-width: 0;
     }
-    .flag { font-size: 16px; flex-shrink: 0; }
+    .flag { width: 24px; height: 18px; object-fit: cover; border-radius: 2px; flex-shrink: 0; }
     .team-name { font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
     /* Points column */
@@ -204,7 +204,8 @@ export class StandingsComponent implements OnInit {
     });
   }
 
-  flag(team: string): string {
-    return FLAGS[team] ?? '🏳️';
+  flagUrl(team: string): string {
+    const code = FLAG_CODES[team];
+    return code ? `https://flagcdn.com/w40/${code}.png` : '';
   }
 }
