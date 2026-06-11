@@ -125,7 +125,7 @@ import { COMMON_TIMEZONES, TzOption } from './data/timezones';
     @media (max-width: 760px) {
       .app-toolbar { flex-wrap: wrap; padding: 8px 12px; gap: 6px; }
       .toolbar-title { font-size: 15px; }
-      .toolbar-sub { display: none; }
+      .toolbar-sub { font-size: 11px; }
       .toolbar-dates { display: none; }
       .tz-field { width: 160px; }
       .spacer { display: none; }
