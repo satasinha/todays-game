@@ -5,7 +5,7 @@ export const FIXTURES: Match[] = [
   { id: 'A1', date: '2026-06-11', timeUTC: '19:00', homeTeam: 'Mexico', awayTeam: 'South Africa', venue: 'Estadio Azteca', city: 'Mexico City', stage: 'Group A', homeScore: null, awayScore: null, status: 'upcoming' },
   { id: 'A2', date: '2026-06-12', timeUTC: '02:00', homeTeam: 'South Korea', awayTeam: 'Czech Republic', venue: 'Estadio Akron', city: 'Zapopan', stage: 'Group A', homeScore: null, awayScore: null, status: 'upcoming' },
   { id: 'A3', date: '2026-06-18', timeUTC: '16:00', homeTeam: 'Czech Republic', awayTeam: 'South Africa', venue: 'Mercedes-Benz Stadium', city: 'Atlanta', stage: 'Group A', homeScore: null, awayScore: null, status: 'upcoming' },
-  { id: 'A4', date: '2026-06-18', timeUTC: '23:00', homeTeam: 'Mexico', awayTeam: 'South Korea', venue: 'Estadio Akron', city: 'Zapopan', stage: 'Group A', homeScore: null, awayScore: null, status: 'upcoming' },
+  { id: 'A4', date: '2026-06-19', timeUTC: '01:00', homeTeam: 'Mexico', awayTeam: 'South Korea', venue: 'Estadio Akron', city: 'Zapopan', stage: 'Group A', homeScore: null, awayScore: null, status: 'upcoming' },
   { id: 'A5', date: '2026-06-25', timeUTC: '01:00', homeTeam: 'Czech Republic', awayTeam: 'Mexico', venue: 'Estadio Azteca', city: 'Mexico City', stage: 'Group A', homeScore: null, awayScore: null, status: 'upcoming' },
   { id: 'A6', date: '2026-06-25', timeUTC: '01:00', homeTeam: 'South Africa', awayTeam: 'South Korea', venue: 'Estadio BBVA', city: 'Guadalupe', stage: 'Group A', homeScore: null, awayScore: null, status: 'upcoming' },
 
@@ -26,7 +26,7 @@ export const FIXTURES: Match[] = [
   { id: 'C6', date: '2026-06-24', timeUTC: '22:00', homeTeam: 'Morocco', awayTeam: 'Haiti', venue: 'Mercedes-Benz Stadium', city: 'Atlanta', stage: 'Group C', homeScore: null, awayScore: null, status: 'upcoming' },
 
   // ── GROUP D: United States · Paraguay · Australia · Turkey ──
-  { id: 'D1', date: '2026-06-12', timeUTC: '13:00', homeTeam: 'United States', awayTeam: 'Paraguay', venue: 'SoFi Stadium', city: 'Inglewood', stage: 'Group D', homeScore: null, awayScore: null, status: 'upcoming' },
+  { id: 'D1', date: '2026-06-13', timeUTC: '01:00', homeTeam: 'United States', awayTeam: 'Paraguay', venue: 'SoFi Stadium', city: 'Inglewood', stage: 'Group D', homeScore: null, awayScore: null, status: 'upcoming' },
   { id: 'D2', date: '2026-06-13', timeUTC: '04:00', homeTeam: 'Australia', awayTeam: 'Turkey', venue: 'BC Place', city: 'Vancouver', stage: 'Group D', homeScore: null, awayScore: null, status: 'upcoming' },
   { id: 'D3', date: '2026-06-19', timeUTC: '19:00', homeTeam: 'United States', awayTeam: 'Australia', venue: 'Lumen Field', city: 'Seattle', stage: 'Group D', homeScore: null, awayScore: null, status: 'upcoming' },
   { id: 'D4', date: '2026-06-19', timeUTC: '03:00', homeTeam: 'Turkey', awayTeam: 'Paraguay', venue: "Levi's Stadium", city: 'Santa Clara', stage: 'Group D', homeScore: null, awayScore: null, status: 'upcoming' },
@@ -43,15 +43,15 @@ export const FIXTURES: Match[] = [
 
   // ── GROUP F: Netherlands · Japan · Sweden · Tunisia ──
   { id: 'F1', date: '2026-06-14', timeUTC: '22:00', homeTeam: 'Netherlands', awayTeam: 'Japan', venue: "AT&T Stadium", city: 'Arlington', stage: 'Group F', homeScore: null, awayScore: null, status: 'upcoming' },
-  { id: 'F2', date: '2026-06-14', timeUTC: '02:00', homeTeam: 'Sweden', awayTeam: 'Tunisia', venue: 'Estadio BBVA', city: 'Guadalupe', stage: 'Group F', homeScore: null, awayScore: null, status: 'upcoming' },
-  { id: 'F3', date: '2026-06-20', timeUTC: '16:00', homeTeam: 'Netherlands', awayTeam: 'Sweden', venue: 'NRG Stadium', city: 'Houston', stage: 'Group F', homeScore: null, awayScore: null, status: 'upcoming' },
-  { id: 'F4', date: '2026-06-20', timeUTC: '04:00', homeTeam: 'Tunisia', awayTeam: 'Japan', venue: 'Estadio BBVA', city: 'Guadalupe', stage: 'Group F', homeScore: null, awayScore: null, status: 'upcoming' },
+  { id: 'F2', date: '2026-06-15', timeUTC: '02:00', homeTeam: 'Sweden', awayTeam: 'Tunisia', venue: 'Estadio BBVA', city: 'Guadalupe', stage: 'Group F', homeScore: null, awayScore: null, status: 'upcoming' },
+  { id: 'F3', date: '2026-06-20', timeUTC: '17:00', homeTeam: 'Netherlands', awayTeam: 'Sweden', venue: 'NRG Stadium', city: 'Houston', stage: 'Group F', homeScore: null, awayScore: null, status: 'upcoming' },
+  { id: 'F4', date: '2026-06-21', timeUTC: '04:00', homeTeam: 'Tunisia', awayTeam: 'Japan', venue: 'Estadio BBVA', city: 'Guadalupe', stage: 'Group F', homeScore: null, awayScore: null, status: 'upcoming' },
   { id: 'F5', date: '2026-06-25', timeUTC: '22:00', homeTeam: 'Japan', awayTeam: 'Sweden', venue: "AT&T Stadium", city: 'Arlington', stage: 'Group F', homeScore: null, awayScore: null, status: 'upcoming' },
   { id: 'F6', date: '2026-06-25', timeUTC: '22:00', homeTeam: 'Tunisia', awayTeam: 'Netherlands', venue: 'Arrowhead Stadium', city: 'Kansas City', stage: 'Group F', homeScore: null, awayScore: null, status: 'upcoming' },
 
   // ── GROUP G: Belgium · Egypt · Iran · New Zealand ──
   { id: 'G1', date: '2026-06-15', timeUTC: '19:00', homeTeam: 'Belgium', awayTeam: 'Egypt', venue: 'Lumen Field', city: 'Seattle', stage: 'Group G', homeScore: null, awayScore: null, status: 'upcoming' },
-  { id: 'G2', date: '2026-06-15', timeUTC: '23:00', homeTeam: 'Iran', awayTeam: 'New Zealand', venue: 'SoFi Stadium', city: 'Inglewood', stage: 'Group G', homeScore: null, awayScore: null, status: 'upcoming' },
+  { id: 'G2', date: '2026-06-15', timeUTC: '01:00', homeTeam: 'Iran', awayTeam: 'New Zealand', venue: 'SoFi Stadium', city: 'Inglewood', stage: 'Group G', homeScore: null, awayScore: null, status: 'upcoming' },
   { id: 'G3', date: '2026-06-21', timeUTC: '19:00', homeTeam: 'Belgium', awayTeam: 'Iran', venue: 'SoFi Stadium', city: 'Inglewood', stage: 'Group G', homeScore: null, awayScore: null, status: 'upcoming' },
   { id: 'G4', date: '2026-06-21', timeUTC: '23:00', homeTeam: 'New Zealand', awayTeam: 'Egypt', venue: 'BC Place', city: 'Vancouver', stage: 'Group G', homeScore: null, awayScore: null, status: 'upcoming' },
   { id: 'G5', date: '2026-06-26', timeUTC: '04:00', homeTeam: 'Egypt', awayTeam: 'Iran', venue: 'Lumen Field', city: 'Seattle', stage: 'Group G', homeScore: null, awayScore: null, status: 'upcoming' },
@@ -62,8 +62,8 @@ export const FIXTURES: Match[] = [
   { id: 'H2', date: '2026-06-15', timeUTC: '22:00', homeTeam: 'Saudi Arabia', awayTeam: 'Uruguay', venue: 'Hard Rock Stadium', city: 'Miami Gardens', stage: 'Group H', homeScore: null, awayScore: null, status: 'upcoming' },
   { id: 'H3', date: '2026-06-21', timeUTC: '16:00', homeTeam: 'Spain', awayTeam: 'Saudi Arabia', venue: 'Mercedes-Benz Stadium', city: 'Atlanta', stage: 'Group H', homeScore: null, awayScore: null, status: 'upcoming' },
   { id: 'H4', date: '2026-06-21', timeUTC: '22:00', homeTeam: 'Uruguay', awayTeam: 'Cape Verde', venue: 'Hard Rock Stadium', city: 'Miami Gardens', stage: 'Group H', homeScore: null, awayScore: null, status: 'upcoming' },
-  { id: 'H5', date: '2026-06-27', timeUTC: '00:00', homeTeam: 'Cape Verde', awayTeam: 'Saudi Arabia', venue: 'NRG Stadium', city: 'Houston', stage: 'Group H', homeScore: null, awayScore: null, status: 'upcoming' },
-  { id: 'H6', date: '2026-06-27', timeUTC: '02:00', homeTeam: 'Uruguay', awayTeam: 'Spain', venue: 'Estadio Akron', city: 'Zapopan', stage: 'Group H', homeScore: null, awayScore: null, status: 'upcoming' },
+  { id: 'H5', date: '2026-06-26', timeUTC: '23:00', homeTeam: 'Cape Verde', awayTeam: 'Saudi Arabia', venue: 'NRG Stadium', city: 'Houston', stage: 'Group H', homeScore: null, awayScore: null, status: 'upcoming' },
+  { id: 'H6', date: '2026-06-27', timeUTC: '00:00', homeTeam: 'Uruguay', awayTeam: 'Spain', venue: 'Estadio Akron', city: 'Zapopan', stage: 'Group H', homeScore: null, awayScore: null, status: 'upcoming' },
 
   // ── GROUP I: France · Senegal · Iraq · Norway ──
   { id: 'I1', date: '2026-06-16', timeUTC: '19:00', homeTeam: 'France', awayTeam: 'Senegal', venue: 'MetLife Stadium', city: 'East Rutherford', stage: 'Group I', homeScore: null, awayScore: null, status: 'upcoming' },
@@ -82,10 +82,10 @@ export const FIXTURES: Match[] = [
   { id: 'J6', date: '2026-06-27', timeUTC: '01:00', homeTeam: 'Jordan', awayTeam: 'Argentina', venue: "AT&T Stadium", city: 'Arlington', stage: 'Group J', homeScore: null, awayScore: null, status: 'upcoming' },
 
   // ── GROUP K: Portugal · DR Congo · Uzbekistan · Colombia ──
-  { id: 'K1', date: '2026-06-17', timeUTC: '16:00', homeTeam: 'Portugal', awayTeam: 'DR Congo', venue: 'NRG Stadium', city: 'Houston', stage: 'Group K', homeScore: null, awayScore: null, status: 'upcoming' },
-  { id: 'K2', date: '2026-06-17', timeUTC: '02:00', homeTeam: 'Uzbekistan', awayTeam: 'Colombia', venue: 'Estadio Azteca', city: 'Mexico City', stage: 'Group K', homeScore: null, awayScore: null, status: 'upcoming' },
-  { id: 'K3', date: '2026-06-23', timeUTC: '16:00', homeTeam: 'Portugal', awayTeam: 'Uzbekistan', venue: 'NRG Stadium', city: 'Houston', stage: 'Group K', homeScore: null, awayScore: null, status: 'upcoming' },
-  { id: 'K4', date: '2026-06-23', timeUTC: '02:00', homeTeam: 'Colombia', awayTeam: 'DR Congo', venue: 'Estadio Akron', city: 'Zapopan', stage: 'Group K', homeScore: null, awayScore: null, status: 'upcoming' },
+  { id: 'K1', date: '2026-06-17', timeUTC: '17:00', homeTeam: 'Portugal', awayTeam: 'DR Congo', venue: 'NRG Stadium', city: 'Houston', stage: 'Group K', homeScore: null, awayScore: null, status: 'upcoming' },
+  { id: 'K2', date: '2026-06-17', timeUTC: '22:00', homeTeam: 'Uzbekistan', awayTeam: 'Colombia', venue: 'Estadio Azteca', city: 'Mexico City', stage: 'Group K', homeScore: null, awayScore: null, status: 'upcoming' },
+  { id: 'K3', date: '2026-06-23', timeUTC: '17:00', homeTeam: 'Portugal', awayTeam: 'Uzbekistan', venue: 'NRG Stadium', city: 'Houston', stage: 'Group K', homeScore: null, awayScore: null, status: 'upcoming' },
+  { id: 'K4', date: '2026-06-23', timeUTC: '22:00', homeTeam: 'Colombia', awayTeam: 'DR Congo', venue: 'Estadio Akron', city: 'Zapopan', stage: 'Group K', homeScore: null, awayScore: null, status: 'upcoming' },
   { id: 'K5', date: '2026-06-27', timeUTC: '23:30', homeTeam: 'Colombia', awayTeam: 'Portugal', venue: 'Hard Rock Stadium', city: 'Miami Gardens', stage: 'Group K', homeScore: null, awayScore: null, status: 'upcoming' },
   { id: 'K6', date: '2026-06-27', timeUTC: '23:30', homeTeam: 'DR Congo', awayTeam: 'Uzbekistan', venue: 'Mercedes-Benz Stadium', city: 'Atlanta', stage: 'Group K', homeScore: null, awayScore: null, status: 'upcoming' },
 
