@@ -2,8 +2,8 @@ name: Update Match Scores
 
 on:
   schedule:
-    # Every hour during the tournament (Jun 11 – Jul 19 2026)
-    - cron: '0 * * * *'
+    # Every 12 hours during the tournament (Jun 11 – Jul 19 2026)
+    - cron: '0 */12 * * *'
   workflow_dispatch:   # allow manual trigger from GitHub UI
 
 jobs:
