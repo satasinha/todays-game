@@ -108,7 +108,7 @@ export class DayMatchesComponent implements OnChanges, OnInit, OnDestroy {
   ngOnInit(): void {
     this.tzSub = this.matchService.matches$.subscribe(() => {
       if (this.selectedDate) {
-        this.matches = this.matchService.getMatchesForDate(this.selectedDate);
+        this.matches = this.matchService.getMatchesForDate(this.selectedDate).map(m => ({ ...m }));
         this.cdr.markForCheck();
       }
     });
@@ -120,7 +120,7 @@ export class DayMatchesComponent implements OnChanges, OnInit, OnDestroy {
 
   ngOnChanges(): void {
     if (this.selectedDate) {
-      this.matches = this.matchService.getMatchesForDate(this.selectedDate);
+      this.matches = this.matchService.getMatchesForDate(this.selectedDate).map(m => ({ ...m }));
     }
   }
 
