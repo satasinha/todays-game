@@ -1,24 +1,12 @@
 
-/* Override material-icons font-display:block → swap so icons don't block rendering */
+/* Override font-display:block from material-icons package — only the filled variant is used */
 @font-face {
   font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
   font-display: swap;
-}
-@font-face {
-  font-family: 'Material Icons Outlined';
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Material Icons Round';
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Material Icons Sharp';
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Material Icons Two Tone';
-  font-display: swap;
+  src: url('material-icons/iconfont/material-icons.woff2') format('woff2'),
+       url('material-icons/iconfont/material-icons.woff') format('woff');
 }
 
 html, body { height: 100%; }
