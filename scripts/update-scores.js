@@ -41,17 +41,13 @@ function normaliseName(name) {
 // ── Match ID derivation ───────────────────────────────────────────────────────
 // football-data.org doesn't expose our custom IDs, so we identify matches by
 // matchday + home/away team names and map them to our IDs via the fixtures file.
-const FIXTURES_RAW = fs.readFileSync(
-  path.join(__dirname, '..', 'src', 'app', 'data', 'fixtures.ts'),
+const FIXTURES_JSON = JSON.parse(fs.readFileSync(
+  path.join(__dirname, '..', 'src', 'assets', 'data', 'fixtures.json'),
   'utf8'
-);
-// Extract id/homeTeam/awayTeam triples from the TypeScript source.
+));
 const fixtureIndex = {};
-const matchRe = /\{\s*id:\s*'([^']+)'[\s\S]*?homeTeam:\s*'([^']+)'[\s\S]*?awayTeam:\s*'([^']+)'/g;
-let m;
-while ((m = matchRe.exec(FIXTURES_RAW)) !== null) {
-  const [, id, home, away] = m;
-  fixtureIndex[`${home}|${away}`] = id;
+for (const f of FIXTURES_JSON.fixtures) {
+  fixtureIndex[`${f.homeTeam}|${f.awayTeam}`] = f.id;
 }
 
 // ── HTTP helper ───────────────────────────────────────────────────────────────
