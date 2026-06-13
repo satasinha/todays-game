@@ -69,9 +69,9 @@ import { COMMON_TIMEZONES, TzOption } from './data/timezones';
       </div>
     </div>
 
-    <div class="app-content">
+    <main class="app-content">
       <router-outlet></router-outlet>
-    </div>
+    </main>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [`
