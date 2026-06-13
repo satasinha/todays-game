@@ -20,16 +20,12 @@ interface CalendarDay {
       <!-- Day view on top -->
       <div class="day-panel">
         <div class="day-panel-inner">
-          <app-day-matches *ngIf="selectedDate" [selectedDate]="selectedDate" (dateChange)="onDayNavChange($event)"></app-day-matches>
-          <div *ngIf="!selectedDate" class="day-panel-placeholder">
-            <mat-icon>touch_app</mat-icon>
-            <p>Select a day on the calendar</p>
-          </div>
+          <app-day-matches *ngIf="selectedDate" [selectedDate]="selectedDate" [calendarOpen]="showCalendar" (dateChange)="onDayNavChange($event)" (calendarToggle)="showCalendar = !showCalendar"></app-day-matches>
         </div>
       </div>
 
-      <!-- Calendar panel below -->
-      <div class="cal-panel">
+      <!-- Calendar panel below (toggled) -->
+      <div class="cal-panel" *ngIf="showCalendar">
         <div class="month-nav">
           <button mat-icon-button (click)="prevMonth()" [disabled]="currentMonth <= 0" aria-label="Previous month">
             <mat-icon>chevron_left</mat-icon>
@@ -223,6 +219,7 @@ interface CalendarDay {
   `]
 })
 export class CalendarViewComponent implements OnInit {
+  showCalendar = false;
   dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   months: { year: number; month: number; label: string }[] = [
     { year: 2026, month: 5, label: 'June 2026' },

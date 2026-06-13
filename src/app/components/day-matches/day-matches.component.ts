@@ -27,6 +27,10 @@ const TOURNAMENT_END   = new Date(2026, 6, 19);
         <button mat-icon-button (click)="go(1)" [disabled]="!canGoNext" aria-label="Next day">
           <mat-icon>chevron_right</mat-icon>
         </button>
+
+        <button mat-icon-button (click)="calendarToggle.emit()" [attr.aria-label]="calendarOpen ? 'Hide calendar' : 'Show calendar'" [class.active-toggle]="calendarOpen">
+          <mat-icon>{{ calendarOpen ? 'calendar_view_day' : 'calendar_month' }}</mat-icon>
+        </button>
       </div>
 
       <!-- Match list -->
@@ -67,6 +71,8 @@ const TOURNAMENT_END   = new Date(2026, 6, 19);
       flex-shrink: 0;
     }
 
+    .active-toggle { color: var(--mat-sys-primary); }
+
     .no-matches {
       display: flex;
       flex-direction: column;
@@ -90,7 +96,9 @@ const TOURNAMENT_END   = new Date(2026, 6, 19);
 })
 export class DayMatchesComponent implements OnChanges, OnInit, OnDestroy {
   @Input()  selectedDate!: Date;
+  @Input()  calendarOpen = false;
   @Output() dateChange = new EventEmitter<Date>();
+  @Output() calendarToggle = new EventEmitter<void>();
 
   matches: Match[] = [];
   private tzSub!: Subscription;
