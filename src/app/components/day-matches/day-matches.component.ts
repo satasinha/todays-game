@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnChanges, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Match } from '../../models/match.model';
 import { MatchService } from '../../services/match.service';
@@ -38,6 +38,7 @@ const TOURNAMENT_END   = new Date(2026, 6, 19);
       <app-match-card *ngFor="let m of matches" [match]="m"></app-match-card>
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [`
     .day-view { padding: 0 4px; }
 
@@ -94,12 +95,13 @@ export class DayMatchesComponent implements OnChanges, OnInit, OnDestroy {
   matches: Match[] = [];
   private tzSub!: Subscription;
 
-  constructor(private matchService: MatchService) {}
+  constructor(private matchService: MatchService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.tzSub = this.matchService.matches$.subscribe(() => {
       if (this.selectedDate) {
         this.matches = this.matchService.getMatchesForDate(this.selectedDate);
+        this.cdr.markForCheck();
       }
     });
   }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
@@ -73,6 +73,7 @@ import { COMMON_TIMEZONES, TzOption } from './data/timezones';
       <router-outlet></router-outlet>
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [`
     :host { display: flex; flex-direction: column; height: 100vh; }
 
@@ -234,6 +235,7 @@ export class AppComponent {
     private titleService: Title,
     private metaService: Meta,
     private router: Router,
+    private cdr: ChangeDetectorRef,
   ) {
     this.selectedTz = matchService.timezone;
     if (!COMMON_TIMEZONES.find(t => t.value === this.selectedTz)) {
@@ -245,6 +247,7 @@ export class AppComponent {
       const tab = url.includes('standings') ? 'standings' : url.includes('knockout') ? 'knockout' : 'schedule';
       this.setTabMeta(tab);
       (window as any).gtag?.('event', 'tab_view', { tab });
+      this.cdr.markForCheck();
     });
   }
 

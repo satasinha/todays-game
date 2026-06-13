@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { Match } from '../../models/match.model';
 import { MatchService } from '../../services/match.service';
 
@@ -74,6 +74,7 @@ interface CalendarDay {
 
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [`
     /* ── Layout: calendar full-width, day view below ── */
     :host { display: block; }
@@ -234,12 +235,13 @@ export class CalendarViewComponent implements OnInit {
   private today = new Date();
   private allMatchDates: Map<string, Match[]> = new Map();
 
-  constructor(private matchService: MatchService) {}
+  constructor(private matchService: MatchService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.matchService.matches$.subscribe(() => {
       this.allMatchDates = this.buildMatchDateMap();
       this.buildCalendar();
+      this.cdr.markForCheck();
     });
 
     // Default to today if within tournament

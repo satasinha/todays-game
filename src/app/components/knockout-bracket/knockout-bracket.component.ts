@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { Match } from '../../models/match.model';
 import { MatchService } from '../../services/match.service';
 import { KNOCKOUT_ROUNDS } from '../../data/fixtures';
@@ -32,6 +32,7 @@ import { KNOCKOUT_ROUNDS } from '../../data/fixtures';
       </mat-tab-group>
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [`
     .bracket-container { padding: 0 4px; }
 
@@ -67,10 +68,10 @@ export class KnockoutBracketComponent implements OnInit {
   rounds = KNOCKOUT_ROUNDS;
   private allMatches: Match[] = [];
 
-  constructor(private matchService: MatchService) {}
+  constructor(private matchService: MatchService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    this.matchService.matches$.subscribe(m => this.allMatches = m);
+    this.matchService.matches$.subscribe(m => { this.allMatches = m; this.cdr.markForCheck(); });
   }
 
   getMatchesForRound(round: string): Match[] {

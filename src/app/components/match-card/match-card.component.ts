@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Match } from '../../models/match.model';
 import { MatchService } from '../../services/match.service';
 
@@ -52,6 +52,7 @@ const FLAG_CODES: Record<string, string> = {
       </mat-card-content>
     </mat-card>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [`
     .match-card {
       margin: 6px 0;

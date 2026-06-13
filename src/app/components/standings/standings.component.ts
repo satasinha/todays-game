@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { GroupStanding } from '../../models/match.model';
 import { MatchService } from '../../services/match.service';
 import { GROUPS } from '../../data/fixtures';
@@ -82,6 +82,7 @@ const FLAG_CODES: Record<string, string> = {
       </div>
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [`
     .standings-wrap { padding: 0 0 48px; }
 
@@ -193,7 +194,7 @@ const FLAG_CODES: Record<string, string> = {
 export class StandingsComponent implements OnInit {
   tables: GroupTable[] = [];
 
-  constructor(private matchService: MatchService) {}
+  constructor(private matchService: MatchService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.matchService.matches$.subscribe(() => {
@@ -201,6 +202,7 @@ export class StandingsComponent implements OnInit {
         group: g,
         rows: this.matchService.getGroupStandings(g),
       }));
+      this.cdr.markForCheck();
     });
   }
 
