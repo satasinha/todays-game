@@ -18,7 +18,7 @@ import { COMMON_TIMEZONES, TzOption } from './data/timezones';
       <span class="spacer"></span>
       <mat-form-field class="tz-field" appearance="outline" subscriptSizing="dynamic">
         <mat-label>Timezone</mat-label>
-        <mat-select [(ngModel)]="selectedTz" (ngModelChange)="onTzChange($event)">
+        <mat-select [(ngModel)]="selectedTz" (ngModelChange)="onTzChange($event)" panelClass="tz-overlay-panel">
           <mat-option *ngFor="let tz of timezones" [value]="tz.value">{{ tz.label }}</mat-option>
         </mat-select>
       </mat-form-field>
@@ -84,9 +84,12 @@ import { COMMON_TIMEZONES, TzOption } from './data/timezones';
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 0 16px;
+      padding: 12px 16px 8px;
       height: auto !important;
       min-height: unset !important;
+      overflow: visible !important;
+      background: var(--mat-sys-primary) !important;
+      color: var(--mat-sys-on-primary) !important;
     }
     .toolbar-icon { font-size: 22px; }
     .toolbar-title { font-size: 18px; font-weight: 700; letter-spacing: 0.3px; white-space: nowrap; }
