@@ -28,7 +28,7 @@ jobs:
         env:
           FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
           # Scores shown to users 48 hours after the match ends
-          SCORE_EMBARGO_HOURS: '48'
+          SCORE_EMBARGO_HOURS: '24'
         run: node scripts/update-scores.js
 
       - name: Commit and push if scores changed
