@@ -53,95 +53,7 @@ const FLAG_CODES: Record<string, string> = {
     </mat-card>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styles: [`
-    .match-card {
-      margin: 6px 0;
-      border-radius: 12px !important;
-      transition: box-shadow 0.2s;
-    }
-    .match-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.15) !important; }
-    .match-card.finished { opacity: 0.8; }
-    .match-card.live { border-left: 4px solid #b71c1c; }
-
-    mat-card-content { padding: 16px 20px !important; }
-
-    .stage-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 12px;
-      flex-wrap: wrap;
-    }
-    .stage-badge {
-      font-size: 18px;
-      font-weight: 600;
-      padding: 3px 10px;
-      border-radius: 20px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      flex-shrink: 0;
-    }
-    .stage-group { background: #c8e6c9; color: #1b5e20; }
-    .stage-knockout { background: #ffe0b2; color: #bf360c; }
-    .stage-final { background: #f8bbd0; color: #6a0f33; }
-    .venue { font-size: 16px; color: var(--mat-sys-on-surface-variant); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
-
-    .teams-row {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      gap: 12px;
-    }
-    .team {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 500;
-      font-size: 28px;
-      min-width: 0;
-    }
-    .team.home { justify-content: flex-end; }
-    .team.away { justify-content: flex-start; }
-    .name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
-    .flag { width: 44px; height: 33px; object-fit: cover; border-radius: 3px; flex-shrink: 0; }
-    .score-time { text-align: center; min-width: 100px; }
-    .score { font-size: 44px; font-weight: 700; }
-    .live-score { color: #b71c1c; }
-    .live-pill {
-      display: block;
-      font-size: 18px;
-      background: #b71c1c;
-      color: white;
-      border-radius: 4px;
-      padding: 3px 8px;
-      margin-top: 4px;
-      animation: pulse 1.2s infinite;
-    }
-    .time { font-size: 32px; font-weight: 600; color: var(--mat-sys-primary); }
-    .tz-suffix { font-size: 0.5em; font-weight: 400; opacity: 0.75; vertical-align: middle; }
-
-    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
-
-    @media (max-width: 760px) {
-      mat-card-content { padding: 14px 12px !important; }
-      .teams-row {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto auto auto;
-        gap: 10px;
-      }
-      .team { justify-content: flex-start !important; font-size: 36px; gap: 10px; }
-      .team.away { flex-direction: row; }
-      .score-time { text-align: left; min-width: unset; }
-      .name { white-space: normal; overflow: visible; text-overflow: unset; }
-      .flag { width: 44px; height: 33px; }
-      .score { font-size: 48px; }
-      .time { font-size: 36px; }
-      .stage-badge { font-size: 18px; padding: 3px 10px; }
-      .venue { font-size: 15px; white-space: normal; }
-      .stage-row { margin-bottom: 12px; }
-      .live-pill { font-size: 20px; padding: 3px 8px; }
-    }
-  `]
+  styleUrl: './match-card.component.scss'
 })
 export class MatchCardComponent {
   @Input() match!: Match;
@@ -156,8 +68,8 @@ export class MatchCardComponent {
   get showScore(): boolean {
     if (this.match.status === 'live') return true;
     if (this.match.status !== 'finished') return false;
-    const matchDate = new Date(`${this.match.date}T00:00:00`);
-    matchDate.setDate(matchDate.getDate() + 2);
+    const matchDate = new Date(`${this.match.date}T${this.match.timeUTC}:00Z`);
+    matchDate.setTime(matchDate.getTime() + 24 * 60 * 60 * 1000);
     return new Date() >= matchDate;
   }
 
