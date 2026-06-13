@@ -24,7 +24,7 @@
               "src/polyfills.ts"
             ],
             "tsConfig": "tsconfig.app.json",
-            "assets": ["src/favicon.ico", "src/assets", "src/robots.txt", "src/sitemap.xml"],
+            "assets": ["src/favicon.ico", "src/assets", "src/robots.txt", "src/sitemap.xml", { "glob": "staticwebapp.config.json", "input": ".", "output": "/" }],
             "styles": [
               "src/material-theme.scss",
               "src/styles.css"
