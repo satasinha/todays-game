@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, forkJoin, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Match, GroupStanding } from '../models/match.model';
-import { FIXTURES, GROUP_TEAMS } from '../data/fixtures';
 
 const TZ_KEY = 'wc2026_timezone';
 
@@ -18,10 +18,17 @@ interface ScoresFile {
   scores: ScoreEntry[];
 }
 
+interface FixturesFile {
+  fixtures: Match[];
+  groupTeams: Record<string, string[]>;
+}
+
 @Injectable({ providedIn: 'root' })
 export class MatchService {
-  private matchesSubject = new BehaviorSubject<Match[]>([...FIXTURES]);
+  private matchesSubject = new BehaviorSubject<Match[]>([]);
   matches$ = this.matchesSubject.asObservable();
+
+  private groupTeams: Record<string, string[]> = {};
 
   private _timezone: string =
     localStorage.getItem(TZ_KEY) ?? Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -29,26 +36,29 @@ export class MatchService {
   get timezone(): string { return this._timezone; }
 
   constructor(private http: HttpClient) {
-    this.fetchScores();
+    this.loadData();
   }
 
-  private fetchScores(): void {
-    // Cache-bust so users always get the latest scores after a deploy
-    const url = `assets/data/scores.json?v=${Date.now()}`;
-    this.http.get<ScoresFile>(url).subscribe({
-      next: (data) => this.applyScores(data.scores),
-      error: () => { /* serve with no scores if fetch fails */ },
-    });
-  }
+  private loadData(): void {
+    const emptyFixtures: FixturesFile = { fixtures: [], groupTeams: {} };
+    const emptyScores: ScoresFile = { lastUpdated: '', scores: [] };
 
-  private applyScores(scores: ScoreEntry[]): void {
-    if (!scores.length) return;
-    const scoreMap = new Map(scores.map(s => [s.id, s]));
-    const updated = FIXTURES.map(m => {
-      const s = scoreMap.get(m.id);
-      return s ? { ...m, homeScore: s.homeScore, awayScore: s.awayScore, status: s.status } : m;
+    const fixtures$ = this.http.get<FixturesFile>('assets/data/fixtures.json').pipe(
+      catchError(() => of(emptyFixtures))
+    );
+    const scores$ = this.http.get<ScoresFile>(`assets/data/scores.json?v=${Date.now()}`).pipe(
+      catchError(() => of(emptyScores))
+    );
+
+    forkJoin([fixtures$, scores$]).subscribe(([fixturesFile, scoresFile]) => {
+      this.groupTeams = fixturesFile.groupTeams;
+      const scoreMap = new Map(scoresFile.scores.map(s => [s.id, s]));
+      const merged = fixturesFile.fixtures.map(m => {
+        const s = scoreMap.get(m.id);
+        return s ? { ...m, homeScore: s.homeScore, awayScore: s.awayScore, status: s.status } : m;
+      });
+      this.matchesSubject.next(merged);
     });
-    this.matchesSubject.next(updated);
   }
 
   setTimezone(tz: string): void {
@@ -113,7 +123,7 @@ export class MatchService {
   }
 
   getGroupStandings(group: string): GroupStanding[] {
-    const teams = GROUP_TEAMS[group] ?? [];
+    const teams = this.groupTeams[group] ?? [];
     const matches = this.matchesSubject.value.filter(
       m => m.stage === `Group ${group}` && m.status === 'finished'
     );

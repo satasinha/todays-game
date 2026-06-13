@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -15,9 +15,9 @@ import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [AppComponent],
+  providers: [provideAnimationsAsync()],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
     FormsModule,
     MatToolbarModule,
     MatIconModule,
