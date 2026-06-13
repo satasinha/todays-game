@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-12T23:06:25.652Z",
+  "lastUpdated": "2026-06-13T02:07:27.007Z",
   "scores": [
     {
       "id": "A1",
@@ -18,6 +18,12 @@
       "homeScore": null,
       "awayScore": null,
       "status": "finished"
+    },
+    {
+      "id": "D1",
+      "homeScore": null,
+      "awayScore": null,
+      "status": "live"
     }
   ]
 }
