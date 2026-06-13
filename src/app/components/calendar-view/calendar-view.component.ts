@@ -31,11 +31,11 @@ interface CalendarDay {
       <!-- Calendar panel below -->
       <div class="cal-panel">
         <div class="month-nav">
-          <button mat-icon-button (click)="prevMonth()" [disabled]="currentMonth <= 0">
+          <button mat-icon-button (click)="prevMonth()" [disabled]="currentMonth <= 0" aria-label="Previous month">
             <mat-icon>chevron_left</mat-icon>
           </button>
           <span class="month-label">{{ monthLabel }}</span>
-          <button mat-icon-button (click)="nextMonth()" [disabled]="currentMonth >= months.length - 1">
+          <button mat-icon-button (click)="nextMonth()" [disabled]="currentMonth >= months.length - 1" aria-label="Next month">
             <mat-icon>chevron_right</mat-icon>
           </button>
           <span class="tz-chip">{{ timezone }}</span>

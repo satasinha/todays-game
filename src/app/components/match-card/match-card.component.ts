@@ -61,7 +61,7 @@ const FLAG_CODES: Record<string, string> = {
     }
     .match-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.15) !important; }
     .match-card.finished { opacity: 0.8; }
-    .match-card.live { border-left: 4px solid #e53935; }
+    .match-card.live { border-left: 4px solid #b71c1c; }
 
     mat-card-content { padding: 16px 20px !important; }
 
@@ -81,9 +81,9 @@ const FLAG_CODES: Record<string, string> = {
       letter-spacing: 0.5px;
       flex-shrink: 0;
     }
-    .stage-group { background: #e8f5e9; color: #2e7d32; }
-    .stage-knockout { background: #fff3e0; color: #e65100; }
-    .stage-final { background: #fce4ec; color: #880e4f; }
+    .stage-group { background: #c8e6c9; color: #1b5e20; }
+    .stage-knockout { background: #ffe0b2; color: #bf360c; }
+    .stage-final { background: #f8bbd0; color: #6a0f33; }
     .venue { font-size: 16px; color: var(--mat-sys-on-surface-variant); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
 
     .teams-row {
@@ -106,11 +106,11 @@ const FLAG_CODES: Record<string, string> = {
     .flag { width: 44px; height: 33px; object-fit: cover; border-radius: 3px; flex-shrink: 0; }
     .score-time { text-align: center; min-width: 100px; }
     .score { font-size: 44px; font-weight: 700; }
-    .live-score { color: #e53935; }
+    .live-score { color: #b71c1c; }
     .live-pill {
       display: block;
       font-size: 18px;
-      background: #e53935;
+      background: #b71c1c;
       color: white;
       border-radius: 4px;
       padding: 3px 8px;
