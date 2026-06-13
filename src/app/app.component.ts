@@ -1,5 +1,6 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, Inject } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
+import { DOCUMENT } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { MatchService } from './services/match.service';
@@ -230,12 +231,15 @@ export class AppComponent {
     },
   };
 
+  private readonly BASE_URL = 'https://fifa-2026.curatedforsale.in';
+
   constructor(
     private matchService: MatchService,
     private titleService: Title,
     private metaService: Meta,
     private router: Router,
     private cdr: ChangeDetectorRef,
+    @Inject(DOCUMENT) private document: Document,
   ) {
     this.selectedTz = matchService.timezone;
     if (!COMMON_TIMEZONES.find(t => t.value === this.selectedTz)) {
@@ -265,5 +269,15 @@ export class AppComponent {
     this.metaService.updateTag({ name: 'description', content: m.description });
     this.metaService.updateTag({ property: 'og:title', content: m.title });
     this.metaService.updateTag({ property: 'og:description', content: m.description });
+
+    const canonicalUrl = `${this.BASE_URL}/${tab}`;
+    let link = this.document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (!link) {
+      link = this.document.createElement('link');
+      link.setAttribute('rel', 'canonical');
+      this.document.head.appendChild(link);
+    }
+    link.setAttribute('href', canonicalUrl);
+    this.metaService.updateTag({ property: 'og:url', content: canonicalUrl });
   }
 }
