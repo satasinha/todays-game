@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-13T19:00:00.000Z",
+  "lastUpdated": "2026-06-14T02:42:45.186Z",
   "scores": [
     {
       "id": "A1",
@@ -9,21 +9,39 @@
     },
     {
       "id": "A2",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 2,
+      "awayScore": 1,
       "status": "finished"
     },
     {
       "id": "B1",
+      "homeScore": 1,
+      "awayScore": 1,
+      "status": "finished"
+    },
+    {
+      "id": "D1",
+      "homeScore": 4,
+      "awayScore": 1,
+      "status": "finished"
+    },
+    {
+      "id": "B2",
       "homeScore": null,
       "awayScore": null,
       "status": "finished"
     },
     {
-      "id": "D1",
+      "id": "C1",
       "homeScore": null,
       "awayScore": null,
       "status": "finished"
+    },
+    {
+      "id": "C2",
+      "homeScore": null,
+      "awayScore": null,
+      "status": "live"
     }
   ]
 }
