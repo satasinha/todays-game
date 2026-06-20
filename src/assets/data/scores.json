@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-19T14:43:39.763Z",
+  "lastUpdated": "2026-06-20T02:31:20.838Z",
   "scores": [
     {
       "id": "A1",
@@ -147,27 +147,45 @@
     },
     {
       "id": "A3",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 1,
       "status": "finished"
     },
     {
       "id": "B3",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 4,
+      "awayScore": 1,
       "status": "finished"
     },
     {
       "id": "B4",
+      "homeScore": 6,
+      "awayScore": 0,
+      "status": "finished"
+    },
+    {
+      "id": "A4",
+      "homeScore": 1,
+      "awayScore": 0,
+      "status": "finished"
+    },
+    {
+      "id": "D3",
       "homeScore": null,
       "awayScore": null,
       "status": "finished"
     },
     {
-      "id": "A4",
+      "id": "C3",
       "homeScore": null,
       "awayScore": null,
       "status": "finished"
+    },
+    {
+      "id": "C4",
+      "homeScore": null,
+      "awayScore": null,
+      "status": "live"
     }
   ]
 }
