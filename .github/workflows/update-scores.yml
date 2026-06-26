@@ -3,7 +3,7 @@ name: Update Match Scores
 on:
   schedule:
     # Every 12 hours during the tournament (Jun 11 – Jul 19 2026)
-    - cron: '0 */12 * * *'
+    - cron: '0 */8 * * *'
   workflow_dispatch:   # allow manual trigger from GitHub UI
 
 jobs:
@@ -30,7 +30,7 @@ jobs:
         env:
           FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
           # Scores shown to users 48 hours after the match ends
-          SCORE_EMBARGO_HOURS: '24'
+          SCORE_EMBARGO_HOURS: '8'
         run: node scripts/update-scores.js
 
       - name: Commit and push if scores changed
