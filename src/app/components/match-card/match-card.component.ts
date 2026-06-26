@@ -28,6 +28,7 @@ const FLAG_CODES: Record<string, string> = {
           <span class="stage-badge" [class]="stageClass">{{ match.stage }}</span>
           <span class="venue">{{ match.city }} · {{ match.venue }}</span>
         </div>
+        <div *ngIf="isKnockout" class="match-date">{{ localDate }}</div>
         <div class="teams-row">
           <div class="team home">
             <img class="flag" [src]="flagUrl(match.homeTeam)" [alt]="match.homeTeam" width="44" height="33">
@@ -83,6 +84,14 @@ export class MatchCardComponent {
     const full = this.matchService.formatLocalTime(this.match.date, this.match.timeUTC);
     const match = full.match(/\s*(GMT[+-][\d:]+|[A-Z]{2,5})$/);
     return match ? match[1] : '';
+  }
+
+  get isKnockout(): boolean {
+    return !this.match.stage.startsWith('Group');
+  }
+
+  get localDate(): string {
+    return this.matchService.formatLocalDate(this.match.date, this.match.timeUTC);
   }
 
   get stageClass(): string {

@@ -41,6 +41,13 @@ mat-card-content { padding: 16px 20px !important; }
   min-width: 0;
 }
 
+.match-date {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--mat-sys-on-surface-variant);
+  margin: -6px 0 10px;
+}
+
 .teams-row {
   display: grid;
   grid-template-columns: 1fr auto 1fr;

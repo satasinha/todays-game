@@ -57,7 +57,7 @@ export class MatchService {
         const s = scoreMap.get(m.id);
         return s ? { ...m, homeScore: s.homeScore, awayScore: s.awayScore, status: s.status } : m;
       });
-      this.matchesSubject.next(merged);
+      this.matchesSubject.next(this.resolveKnockoutTeams(merged));
     });
   }
 
@@ -87,6 +87,12 @@ export class MatchService {
 
   toDateKey(d: Date): string {
     return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+  }
+
+  formatLocalDate(dateStr: string, timeStr: string, tz = this._timezone): string {
+    return this.utcDate(dateStr, timeStr).toLocaleDateString('en', {
+      weekday: 'short', day: 'numeric', month: 'short', timeZone: tz,
+    });
   }
 
   formatLocalTime(dateStr: string, timeStr: string, tz = this._timezone): string {
@@ -122,16 +128,46 @@ export class MatchService {
     return dates;
   }
 
-  getGroupStandings(group: string): GroupStanding[] {
+  private resolveKnockoutTeams(matches: Match[]): Match[] {
+    const standings = new Map<string, GroupStanding[]>();
+    const getStandings = (group: string) => {
+      if (!standings.has(group)) {
+        standings.set(group, this.computeStandings(group, matches));
+      }
+      return standings.get(group)!;
+    };
+
+    const resolve = (placeholder: string): string => {
+      const winnerMatch = placeholder.match(/^Winner Group ([A-L])$/);
+      if (winnerMatch) {
+        const s = getStandings(winnerMatch[1]);
+        if (s.length && s[0].played >= 3) return s[0].team;
+      }
+      const runnerMatch = placeholder.match(/^Runner-up Group ([A-L])$/);
+      if (runnerMatch) {
+        const s = getStandings(runnerMatch[1]);
+        if (s.length >= 2 && s[1].played >= 3) return s[1].team;
+      }
+      return placeholder;
+    };
+
+    return matches.map(m => ({
+      ...m,
+      homeTeam: resolve(m.homeTeam),
+      awayTeam: resolve(m.awayTeam),
+    }));
+  }
+
+  private computeStandings(group: string, matches: Match[]): GroupStanding[] {
     const teams = this.groupTeams[group] ?? [];
-    const matches = this.matchesSubject.value.filter(
+    const groupMatches = matches.filter(
       m => m.stage === `Group ${group}` && m.status === 'finished'
     );
     const table: Record<string, GroupStanding> = {};
     teams.forEach(t => {
       table[t] = { group, team: t, played: 0, won: 0, drawn: 0, lost: 0, gf: 0, ga: 0, gd: 0, points: 0 };
     });
-    matches.forEach(m => {
+    groupMatches.forEach(m => {
       if (m.homeScore === null || m.awayScore === null) return;
       const h = table[m.homeTeam], a = table[m.awayTeam];
       if (!h || !a) return;
@@ -146,5 +182,9 @@ export class MatchService {
     return Object.values(table).sort((a, b) =>
       b.points - a.points || b.gd - a.gd || b.gf - a.gf
     );
+  }
+
+  getGroupStandings(group: string): GroupStanding[] {
+    return this.computeStandings(group, this.matchesSubject.value);
   }
 }
