@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-25T14:04:38.477Z",
+  "lastUpdated": "2026-06-26T02:29:40.460Z",
   "scores": [
     {
       "id": "A1",
@@ -291,39 +291,75 @@
     },
     {
       "id": "B5",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 2,
+      "awayScore": 1,
       "status": "finished"
     },
     {
       "id": "B6",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 3,
+      "awayScore": 1,
       "status": "finished"
     },
     {
       "id": "C6",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 4,
+      "awayScore": 2,
       "status": "finished"
     },
     {
       "id": "C5",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 3,
       "status": "finished"
     },
     {
       "id": "A5",
+      "homeScore": 0,
+      "awayScore": 3,
+      "status": "finished"
+    },
+    {
+      "id": "A6",
+      "homeScore": 1,
+      "awayScore": 0,
+      "status": "finished"
+    },
+    {
+      "id": "E6",
       "homeScore": null,
       "awayScore": null,
       "status": "finished"
     },
     {
-      "id": "A6",
+      "id": "E5",
       "homeScore": null,
       "awayScore": null,
       "status": "finished"
+    },
+    {
+      "id": "F6",
+      "homeScore": null,
+      "awayScore": null,
+      "status": "finished"
+    },
+    {
+      "id": "F5",
+      "homeScore": null,
+      "awayScore": null,
+      "status": "finished"
+    },
+    {
+      "id": "D5",
+      "homeScore": null,
+      "awayScore": null,
+      "status": "live"
+    },
+    {
+      "id": "D6",
+      "homeScore": null,
+      "awayScore": null,
+      "status": "live"
     }
   ]
 }
