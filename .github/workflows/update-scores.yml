@@ -9,6 +9,8 @@ on:
 jobs:
   update:
     runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.commit.outputs.changed }}
     permissions:
       contents: write   # needed to push the updated scores.json
 
@@ -46,8 +48,8 @@ jobs:
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Trigger Azure deployment
-        if: steps.commit.outputs.changed == 'true'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh workflow run azure-static-web-apps-wonderful-flower-059fd440f.yml --ref main
+  deploy:
+    needs: update
+    if: needs.update.outputs.changed == 'true'
+    uses: ./.github/workflows/azure-static-web-apps-wonderful-flower-059fd440f.yml
+    secrets: inherit
