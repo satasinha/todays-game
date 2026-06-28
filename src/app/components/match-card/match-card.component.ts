@@ -70,7 +70,7 @@ export class MatchCardComponent {
     if (this.match.status === 'live') return true;
     if (this.match.status !== 'finished') return false;
     const matchDate = new Date(`${this.match.date}T${this.match.timeUTC}:00Z`);
-    matchDate.setTime(matchDate.getTime() + 24 * 60 * 60 * 1000);
+    matchDate.setTime(matchDate.getTime() + 2.5 * 60 * 60 * 1000);
     return new Date() >= matchDate;
   }
 
