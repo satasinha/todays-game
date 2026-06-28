@@ -243,7 +243,7 @@ export class CalendarViewComponent implements OnInit {
 
     // Default to today if within tournament
     const tournamentStart = new Date(2026, 5, 11);
-    const tournamentEnd = new Date(2026, 6, 19);
+    const tournamentEnd = new Date(2026, 6, 20);
     if (this.today >= tournamentStart && this.today <= tournamentEnd) {
       this.selectedDate = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate());
       this.currentMonth = this.today.getMonth() === 5 ? 0 : 1;
@@ -317,7 +317,7 @@ export class CalendarViewComponent implements OnInit {
     const firstDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
     const tournamentStart = new Date(2026, 5, 11);
-    const tournamentEnd = new Date(2026, 6, 19);
+    const tournamentEnd = new Date(2026, 6, 20);
 
     this.calendarDays = [];
 

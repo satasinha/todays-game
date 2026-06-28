@@ -4,7 +4,7 @@ import { Match } from '../../models/match.model';
 import { MatchService } from '../../services/match.service';
 
 const TOURNAMENT_START = new Date(2026, 5, 11);
-const TOURNAMENT_END   = new Date(2026, 6, 19);
+const TOURNAMENT_END   = new Date(2026, 6, 20);
 
 @Component({
   selector: 'app-day-matches',
