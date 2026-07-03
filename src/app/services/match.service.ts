@@ -43,7 +43,7 @@ export class MatchService {
     const emptyFixtures: FixturesFile = { fixtures: [], groupTeams: {} };
     const emptyScores: ScoresFile = { lastUpdated: '', scores: [] };
 
-    const fixtures$ = this.http.get<FixturesFile>('assets/data/fixtures.json').pipe(
+    const fixtures$ = this.http.get<FixturesFile>(`assets/data/fixtures.json?v=${Date.now()}`).pipe(
       catchError(() => of(emptyFixtures))
     );
     const scores$ = this.http.get<ScoresFile>(`assets/data/scores.json?v=${Date.now()}`).pipe(
