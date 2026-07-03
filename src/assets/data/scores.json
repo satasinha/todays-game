@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-03T02:47:57.003Z",
+  "lastUpdated": "2026-07-03T10:33:44.142Z",
   "scores": [
     {
       "id": "A1",
@@ -495,12 +495,18 @@
     },
     {
       "id": "R32-11",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 3,
+      "awayScore": 0,
       "status": "finished"
     },
     {
       "id": "R32-13",
+      "homeScore": 2,
+      "awayScore": 1,
+      "status": "finished"
+    },
+    {
+      "id": "R32-12",
       "homeScore": null,
       "awayScore": null,
       "status": "finished"
