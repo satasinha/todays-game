@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-08T05:15:00.000Z",
+  "lastUpdated": "2026-07-08T10:15:18.238Z",
   "scores": [
     {
       "id": "A1",
@@ -554,29 +554,9 @@
       "status": "finished"
     },
     {
-      "id": "R16-5",
-      "homeScore": 1,
-      "awayScore": 0,
-      "status": "finished"
-    },
-    {
-      "id": "R16-6",
-      "homeScore": 4,
-      "awayScore": 1,
-      "status": "finished"
-    },
-    {
-      "id": "R16-7",
-      "homeScore": 2,
-      "awayScore": 3,
-      "status": "finished"
-    },
-    {
       "id": "R16-8",
-      "homeScore": 0,
-      "awayScore": 0,
-      "homePenalty": 4,
-      "awayPenalty": 3,
+      "homeScore": 4,
+      "awayScore": 3,
       "status": "finished"
     }
   ]
