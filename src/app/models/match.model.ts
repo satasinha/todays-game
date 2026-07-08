@@ -9,6 +9,8 @@ export interface Match {
   stage: string;      // "Group A" | "Round of 32" | "Quarter-final" etc.
   homeScore: number | null;
   awayScore: number | null;
+  homePenalty?: number | null;
+  awayPenalty?: number | null;
   status: 'upcoming' | 'live' | 'finished';
 }
 

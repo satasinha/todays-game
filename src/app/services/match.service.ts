@@ -10,6 +10,8 @@ interface ScoreEntry {
   id: string;
   homeScore: number | null;
   awayScore: number | null;
+  homePenalty?: number | null;
+  awayPenalty?: number | null;
   status: 'upcoming' | 'live' | 'finished';
 }
 
@@ -55,7 +57,7 @@ export class MatchService {
       const scoreMap = new Map(scoresFile.scores.map(s => [s.id, s]));
       const merged = fixturesFile.fixtures.map(m => {
         const s = scoreMap.get(m.id);
-        return s ? { ...m, homeScore: s.homeScore, awayScore: s.awayScore, status: s.status } : m;
+        return s ? { ...m, homeScore: s.homeScore, awayScore: s.awayScore, homePenalty: s.homePenalty, awayPenalty: s.awayPenalty, status: s.status } : m;
       });
       this.matchesSubject.next(this.resolveKnockoutTeams(merged));
     });

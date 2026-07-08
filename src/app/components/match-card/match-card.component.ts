@@ -39,6 +39,7 @@ const FLAG_CODES: Record<string, string> = {
               <span class="score" [class.live-score]="match.status === 'live'">
                 {{ match.homeScore }} – {{ match.awayScore }}
               </span>
+              <span *ngIf="hasPenalties" class="penalty-note">({{ match.homePenalty }}-{{ match.awayPenalty }} pens)</span>
               <span *ngIf="match.status === 'live'" class="live-pill">LIVE</span>
             </ng-container>
             <ng-template #showTime>
@@ -84,6 +85,10 @@ export class MatchCardComponent {
     const full = this.matchService.formatLocalTime(this.match.date, this.match.timeUTC);
     const match = full.match(/\s*(GMT[+-][\d:]+|[A-Z]{2,5})$/);
     return match ? match[1] : '';
+  }
+
+  get hasPenalties(): boolean {
+    return this.match.homePenalty != null && this.match.awayPenalty != null;
   }
 
   get isKnockout(): boolean {
