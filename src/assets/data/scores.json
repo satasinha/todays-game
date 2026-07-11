@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-11T02:29:20.762Z",
+  "lastUpdated": "2026-07-11T09:26:55.570Z",
   "scores": [
     {
       "id": "A1",
@@ -561,8 +561,8 @@
     },
     {
       "id": "QF2",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 2,
+      "awayScore": 1,
       "status": "finished"
     }
   ]
