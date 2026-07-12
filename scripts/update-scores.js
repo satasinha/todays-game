@@ -46,8 +46,13 @@ const FIXTURES_JSON = JSON.parse(fs.readFileSync(
   'utf8'
 ));
 const fixtureIndex = {};
+const fixtureById  = {};
 for (const f of FIXTURES_JSON.fixtures) {
+  // Later-round fixtures are seeded ahead of time and the API doesn't always
+  // agree with us on which side is "home" vs "away", so index both orderings.
   fixtureIndex[`${f.homeTeam}|${f.awayTeam}`] = f.id;
+  fixtureIndex[`${f.awayTeam}|${f.homeTeam}`] = f.id;
+  fixtureById[f.id] = f;
 }
 
 // ── HTTP helper ───────────────────────────────────────────────────────────────
@@ -90,6 +95,10 @@ async function main() {
       continue;
     }
 
+    // scores.json stores homeScore/awayScore relative to *our* fixtures.json
+    // ordering, which may not match the API's home/away assignment.
+    const swapped = fixtureById[id].homeTeam !== home;
+
     let status, homeScore, awayScore;
 
     if (apiStatus === 'FINISHED') {
@@ -97,8 +106,8 @@ async function main() {
       const elapsed  = now - matchUtc;
       status    = 'finished';
       if (elapsed >= embargoMs) {
-        homeScore = match.score.fullTime.home;
-        awayScore = match.score.fullTime.away;
+        homeScore = swapped ? match.score.fullTime.away : match.score.fullTime.home;
+        awayScore = swapped ? match.score.fullTime.home : match.score.fullTime.away;
       } else {
         // Within embargo: omit scores to avoid spoilers
         homeScore = null;
