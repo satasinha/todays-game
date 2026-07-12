@@ -3,7 +3,7 @@
  * Fetches live match results from football-data.org and writes
  * src/assets/data/scores.json for the Angular app to consume.
  *
- * Scores are published only after a 2-day embargo (configurable via
+ * Scores are published only after an 8 hour embargo (configurable via
  * SCORE_EMBARGO_HOURS). Standings-relevant status ("finished") is always
  * written so the standings table stays live; the score values are set
  * to null during the embargo window so the UI shows "–" instead of spoilers.
